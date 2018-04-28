@@ -1,0 +1,51 @@
+{
+  "name": "data-widget",
+  "version": "0.0.4",
+  "configuratorVersion": "0.0.4",
+  "description": "",
+  "keywords": [],
+  "author": {
+    "name": "",
+    "email": ""
+  },
+  "license": "ISC",
+  "copyright": "",
+  "contact": "",
+  "developer": "",
+  "docUrl": "",
+  "demoUrl": "",
+  "iconUrl": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "webpack --watch",
+    "build": "webpack",
+    "pack": "ewtool pack",
+    "pack widget": "ewtool pack widget",
+    "pack config": "ewtool pack config",
+    "release": "ewtool release",
+    "release widget": "ewtool release widget",
+    "release config": "ewtool release config",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "browser-sync": "^2.23.5",
+    "browser-sync-webpack-plugin": "^1.2.0",
+    "css-loader": "^0.28.9",
+    "fs-extra": "^5.0.0",
+    "handlebars": "^4.0.11",
+    "handlebars-loader": "^1.6.0",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "open": "0.0.5",
+    "style-loader": "^0.19.1",
+    "multiparty": "^4.1.3",
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {}
+}

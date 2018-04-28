@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>组件配置</title>
+	<meta charset="utf-8">
+	<link rel="icon" href="./preview/lib/img/favicon.ico">
+	<link type="text/css" href="./preview/lib/css/font-awesome.min.css" rel="stylesheet">
+  <link type="text/css" href="./preview/lib/css/jquery-ui.structure.min.css" rel="stylesheet">
+  <link id="theme" themename="black-tie" type="text/css" href="./preview/lib/css/themes/black-tie/jquery-ui.theme.min.css" rel="stylesheet">
+  <link type="text/css" href="./preview/lib/css/home.css" rel="stylesheet">
+  <style type="text/css">
+    .menu .fa-trash-alt {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+    }
+    #config-frame {
+      padding-bottom: 40px;
+      box-sizing: border-box;
+    }
+  </style>
+
+	<script>
+    var _u_t_k_ = 'fDggXxt8XXuR3pUwKGDJlm-JIWA3LC92';
+    var isStandalone = false;
+    var projectTitle = '组件配置';
+    var menuNodes = [{
+      "node_id": 1,
+      "node_name": "自定义场景",
+      "parent_node_id": 0,
+      "is_leaf": "N",
+      "ord": 2,
+      "page_id": 104,
+      "icon": "far fa-edit",
+      "hidden": "N",
+      "is_public": "N"
+    },{
+      "node_id": 2,
+      "node_name": "基本用法",
+      "parent_node_id": 1,
+      "is_leaf": "Y",
+      "ord": 2,
+      "page_id": 2,
+      "hidden": "N",
+      "is_public": "N"
+    }, {
+      "node_id": 100,
+      "node_name": "定向场景",
+      "parent_node_id": 0,
+      "is_leaf": "N",
+      "ord": 2,
+      "page_id": null,
+      "icon": "fas fa-tasks",
+      "hidden": "N",
+      "is_public": "F"
+    }, {
+      "node_id": 101,
+      "node_name": "初始化(construct)",
+      "parent_node_id": 100,
+      "is_leaf": "Y",
+      "ord": 2,
+      "page_id": 101,
+      "icon": "fas fa-check-square",
+      "hidden": "N",
+      "is_public": "N"
+    }, {
+      "node_id": 102,
+      "node_name": "展示可用变量(getData)",
+      "parent_node_id": 100,
+      "is_leaf": "Y",
+      "ord": 2,
+      "page_id": 102,
+      "icon": "fas fa-check-square",
+      "hidden": "N",
+      "is_public": "N"
+    }, {
+      "node_id": 103,
+      "node_name": "联动刷新影响(affected)",
+      "parent_node_id": 100,
+      "is_leaf": "Y",
+      "ord": 2,
+      "page_id": 103,
+      "icon": "fas fa-check-square",
+      "hidden": "N",
+      "is_public": "N"
+    }, {
+      "node_id": 104,
+      "node_name": "执行动作前检查组件(isValid)",
+      "parent_node_id": 100,
+      "is_leaf": "Y",
+      "ord": 2,
+      "page_id": 104,
+      "icon": "fas fa-check-square",
+      "hidden": "N",
+      "is_public": "N"
+    }, {
+      "node_id": 105,
+      "node_name": "窗口尺寸变化(onResize)",
+      "parent_node_id": 100,
+      "is_leaf": "Y",
+      "ord": 2,
+      "page_id": 105,
+      "icon": "fas fa-check-square",
+      "hidden": "N",
+      "is_public": "N"
+    }, {
+      "node_id": 106,
+      "node_name": "事件触发一览(trig)",
+      "parent_node_id": 100,
+      "is_leaf": "Y",
+      "ord": 2,
+      "page_id": 106,
+      "icon": "fas fa-check-square",
+      "hidden": "N",
+      "is_public": "N"
+    }, {
+      "node_id": 107,
+      "node_name": "重置组件(destroy)",
+      "parent_node_id": 100,
+      "is_leaf": "Y",
+      "ord": 2,
+      "page_id": 107,
+      "icon": "fas fa-check-square",
+      "hidden": "N",
+      "is_public": "N"
+    }];
+    //menuNodesExtraStart
+    window.menuNodesExtraEnd = []
+    //menuNodesExtraEnd
+
+    window.menuNodesExtraEnd = window.menuNodesExtraEnd || [];
+    window.menuNodesExtraEnd.forEach(function (item) {
+      if (item.id == 2) {
+        return;
+      }
+      menuNodes.push({
+        "hidden": "N",
+        "is_leaf": "Y",
+        "node_id": item.id,
+        "node_name": item.name,
+        "ord": 4,
+        "page_id": item.id,
+        "parent_node_id": 1,
+        "icon": "fas fa-trash-alt",
+        "project_id": 1
+      })
+    });
+
+    var frontSettings = {
+      "themeName": "black-tie",
+      "header": {
+        "height": 64,
+        "projectTitleFontSize": 20,
+        "projectTitleFontWeight": "bold"
+      },
+      "navigator": {
+        "fontSize": 14,
+        "width": 256,
+        "vSpacing": 34,
+        "expandAll": true,
+        "expandToggle": false
+      },
+      "beforeEntering": {
+        "enabled": false,
+        "funcStr": ""
+      },
+      "window": {
+        "titleAlign": "center",
+        "headHeight": 48,
+        "headFontSize": 16,
+        "headFontWeight": "bold",
+        "topStyle": "default",
+        "barHeight": 48,
+        "barPadding": 4,
+        "buttonFontSize": 14,
+        "buttonFontWeight": "bold",
+        "buttonAlign": "center",
+        "buttonCorner": "square",
+        "effect": "drop",
+        "corner": "square",
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "paddingTop": 0,
+        "paddingBottom": 0
+      },
+      "loginPage": {
+        "logoHeight": 32,
+        "backgroundImgUrl": "",
+        "transparency": "0.9",
+        "style": "right",
+        "titleFontSize": 24,
+        "titleFontWeight": "normal",
+        "noAnimation": false
+      },
+      "homePage": {
+        "homePageNum": ""
+      },
+      "footer": {
+        "content": "©2016 - 2018 Wuyuan Inc."
+      },
+      "favicon": "/preview/lib/img/wuyuan.ico",
+      "transparency": 0.3,
+      "backgroundImgUrl": "",
+      "logoUrl": "/preview/lib/img/logo.png",
+      "projectTitle": "组件配置",
+      "themeSwitchable": true
+    };
+    var indexPage = '';
+  </script>
+</head>
+
+<body theme="black-tie" lang="zh-cn"></body>
+<script src="./preview/lib/js/jquery-1.10.1.min.js"></script>
+<script src="./preview/lib/js/jquery-ui.min.js"></script>
+<script src="./preview/lib/js/jquery.cookie.js"></script>
+<script src="./preview/lib/js/home.zh-cn.js"></script>
+</html>
+

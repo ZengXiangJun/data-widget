@@ -1,0 +1,98 @@
+{
+  "implementer": "ZPage",
+  "modal": "",
+  "title": "",
+  "ehandlers": {},
+  "firstFrameNo": 10,
+  "frames": {
+    "10": {
+      "no": 10,
+      "implementer": "ZFrame",
+      "mainWinNo": "",
+      "ehandlers": {},
+      "windows": {
+        "11": {
+          "no": 11,
+          "implementer": "ZWindow",
+          "width": "80%",
+          "height": "90%",
+          "top": true,
+          "bar": "bottom",
+          "btnAlign": "center",
+          "title": "data-widget （重置组件会调用 destroy 方法，然后重新初始化窗口组件）",
+          "dTitle": "",
+          "x": "10%",
+          "y": "5%",
+          "resizable": false,
+          "draggable": false,
+          "autoAffected": true,
+          "buttons": [
+            {
+              "id": "ButtonClick0",
+              "name": "点我重置",
+              "icon": "btn-icon   fas fa-redo",
+              "updateEvents": [
+                ""
+              ]
+            }
+          ],
+          "ehandlers": {
+            "ButtonClick0": {
+              "id": "ButtonClick0",
+              "ename": "点我重置",
+              "srcType": "Button",
+              "checkWindow": false,
+              "beforeAction": false,
+              "procedure": false,
+              "procDepended": false,
+              "actionMatchingMode": "all",
+              "actions": [
+                {
+                  "id": "ButtonClick0",
+                  "cond": "1 = 1",
+                  "type": "r",
+                  "tar": "w11",
+                  "ename": "点我重置",
+                  "affect": false
+                }
+              ],
+              "afterAction": false
+            }
+          },
+          "widgetProfile": false,
+          "widgetName": "data-widget",
+          "widgetVersion": "0.0.0",
+          "widgetConfiguratorVersion": null,
+          "titleAlign": "center",
+          "headHeight": 48,
+          "headFontSize": 16,
+          "headFontWeight": "bold",
+          "headIcon": "fas fa-puzzle-piece",
+          "highlightDTVar": false,
+          "topStyle": "default",
+          "closeBtn": false,
+          "refreshBtn": false,
+          "maximizeBtn": false,
+          "autoHeight": false,
+          "noTopBorder": false,
+          "noRightBorder": false,
+          "noLeftBorder": false,
+          "noBottomBorder": false,
+          "zIndex": "",
+          "vCenter": false,
+          "hCenter": false,
+          "paddingLeft": null,
+          "paddingRight": null,
+          "paddingTop": null,
+          "paddingBottom": null,
+          "corner": "rounded",
+          "regularRefresh": false,
+          "refreshInterval": null,
+          "open": true
+        }
+      },
+      "pageJump": {},
+      "dependencies": []
+    }
+  }
+}

@@ -1,0 +1,188 @@
+<div class="sourceWindow" id="sourceWindow" sourceId=""></div>
+<div class="tplWindow ui-widget-content">
+	<div class="left ui-widget-content">
+		<div class="topTitle ui-state-hover">
+			<i class="fa fa-wrench"></i>{{locale.operateTitle}}
+		</div>
+		<div class="operate">
+			<button class="addPic" title="添加图片">{{locale.addPic}}</button>
+			<button class="addTitle" title="添加标题">{{locale.addTitle}}</button>
+			<button class="addPara" title="添加段落">{{locale.addPara}}</button>
+			<button class="addIcon" title="添加图标">{{locale.addIcon}}</button>
+			<button class="addButton" title="添加按钮">{{locale.addButton}}</button>
+		</div>
+		<div class="editWindow">
+			<div class="picEdit edit" style="display: none;">
+				<div class="left_wrap">
+					<div class="ui-state-hover">{{locale.picEdit}}</div>
+					<div>{{locale.src}}</div>
+					<div>{{locale.width}}</div>
+					<div>{{locale.height}}</div>
+					<div>{{locale.opacity}}</div>
+					<div>{{locale.borderRadius}}</div>
+					<div></div>
+				</div>
+				<div class="right_wrap">
+					<div class="ui-state-hover"></div>
+					<div><input type="text" id="picSrc" title="图片地址 或 @变量名@"></div>
+					<div><input type="number" id="picWidth" title="大于 0"></div>
+					<div><input type="number" id="picHeight" title="大于 0"></div>
+					<div><input type="range" id="picOpacity" title="范围 0 - 1" min="0.0" max="1.0" step="0.1"></div>
+					<div><input type="range" id="picBorderRadius" min="0" max="50" title="范围 0% - 50%"></div>
+					<div>
+						<button class="deleteUnit">{{locale.delete}}</button>
+						<button id="savePic">{{locale.save}}</button>
+					</div>
+				</div>
+			</div>
+			<div class="titleEdit edit" style="display: none;">
+				<div class="left_wrap">
+					<div class="ui-state-hover">{{locale.titleEdit}}</div>
+					<div>{{locale.src}}</div>
+					<div>{{locale.fontFamily}}</div>
+					<div>{{locale.fontSize}}</div>
+					<div>{{locale.spacing}}</div>
+					<div>{{locale.fontWeight}}</div>
+					<div></div>
+				</div>
+				<div class="right_wrap">
+					<div class="ui-state-hover"></div>
+					<div><input type="text" id="titleSrc" title="文本 或 @变量名@"></div>
+					<div>
+						<select id="titleFontFamily" title="选择字体">
+							<option value="simsun">simsun</option>
+							<option value="microsoft-yahei">microsoft-yahei</option>
+							<option value="arial">arial</option>
+							<option value="tahoma">tahoma</option>
+							<option value="verdana">verdana</option>
+							<option value="helvetica">helvetica</option>
+							<option value="serif">serif</option>
+							<option value="sans-serif">sans-serif</option>
+							<option value="cursive">cursive</option>
+							<option value="fantasy">fantasy</option>
+							<option value="monospace">monospace</option>
+						</select>
+					</div>
+					<div><input type="number" id="titleFontSize" title="大于 10"></div>
+					<div><input type="number" id="titleSpacing" title="大于 0"></div>
+					<div><input type="range" id="titleFontWeight" title="范围 100 - 900" min="100" max="900" step="100"></div>
+					<div>
+						<button class="deleteUnit">{{locale.delete}}</button>
+						<button id="saveTitle">{{locale.save}}</button>
+					</div>
+				</div>
+			</div>
+			<div class="paraEdit edit" style="display: none;">
+				<div class="left_wrap">
+					<div class="ui-state-hover">{{locale.paraEdit}}</div>
+					<div>{{locale.src}}</div>
+					<div>{{locale.fontFamily}}</div>
+					<div>{{locale.fontSize}}</div>
+					<div>{{locale.lineSpacing}}</div>
+					<div>{{locale.hasBorder}}</div>
+					<div>{{locale.fontWeight}}</div>
+					<div>{{locale.opacity}}</div>
+				</div>
+				<div class="right_wrap">
+					<div class="ui-state-hover"></div>
+					<div><input type="text" id="paraSrc" title="文本 或 @变量名@"></div>
+					<div>
+						<select id="paraFontFamily" title="选择字体">
+							<option value="simsun">simsun</option>
+							<option value="microsoft-yahei">microsoft-yahei</option>
+							<option value="arial">arial</option>
+							<option value="tahoma">tahoma</option>
+							<option value="verdana">verdana</option>
+							<option value="helvetica">helvetica</option>
+							<option value="serif">serif</option>
+							<option value="sans-serif">sans-serif</option>
+							<option value="cursive">cursive</option>
+							<option value="fantasy">fantasy</option>
+							<option value="monospace">monospace</option>
+						</select>
+					</div>
+					<div><input type="number" id="paraFontSize" title="大于 10"></div>
+					<div><input type="number" id="paraSpacing" title="大于 0"></div>
+					<div><input type="checkbox" id="paraBorder" title="勾选"></div>
+					<div><input type="range" id="paraFontWeight" title="范围 100 - 900" min="100" max="900" step="100"></div>
+					<div><input type="range" id="paraOpacity" title="范围 0 - 1" min="0.0" max="1.0" step="0.1"></div>
+					<div>
+						<button class="deleteUnit">{{locale.delete}}</button>
+						<button id="savePara">{{locale.save}}</button>
+					</div>
+				</div>
+			</div>
+			<div class="iconEdit edit" style="display: none;">
+				<div class="left_wrap">
+					<div class="ui-state-hover">{{locale.iconEdit}}</div>
+					<div>{{locale.src}}</div>
+					<div>{{locale.fontSize}}</div>
+				</div>
+				<div class="right_wrap">
+					<div class="ui-state-hover"></div>
+					<div title="选择图标"><i id="iconSrc"></i></div>
+					<div><input type="number" id="iconFontSize" title="大于 10"></div>
+					<div>
+						<button class="deleteUnit">{{locale.delete}}</button>
+						<button id="saveIcon">{{locale.save}}</button>
+					</div>
+				</div>
+			</div>
+			<div class="buttonEdit edit" style="display: none;">
+				<div class="left_wrap">
+					<div class="ui-state-hover">{{locale.buttonEdit}}</div>
+					<div>{{locale.showIcon}}</div>
+					<div>{{locale.icon}}</div>
+					<div>{{locale.text}}</div>
+				</div>
+				<div class="right_wrap">
+					<div class="ui-state-hover"></div>
+					<div><input type="checkbox" id="showIcon" title="显示图标"></div>
+					<div title="选择图标"><i id="buttonIcon"></i></div>
+					<div><input type="text" id="buttonText" title="按钮名称"></div>
+					<div>
+						<button class="deleteUnit">{{locale.delete}}</button>
+						<button id="saveButton">{{locale.save}}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="right ui-widget-content">
+		<div class="topTitle ui-state-hover">
+			<i class="fa fa-wrench"></i>{{locale.template}}
+		</div>
+		<div class="outerWrap_1">
+			<div class="template ui-widget-content"></div>
+		</div>
+		<div class="outerWrap_2 ui-state-hover" title="超出边框的按钮将不会显示"></div>
+	</div>
+</div>
+<div class="configWindow ui-widget-content">
+	<div class="leftConfig">
+		<div class="row_1"><i class="fa fa-wrench"></i>{{locale.componentConfig}}</div>
+		<div class="row_2">{{locale.setSpacing}}</div>
+		<div class="row_3">{{locale.selectHighlight}}</div>
+		<div class="row_4">{{locale.hoverHighlight}}</div>
+		<div class="row_5">{{locale.sortable}}</div>
+		<div class="row_6">{{locale.pagination}}</div>
+		<div class="row_7">{{locale.pagerPos}}</div>
+		<div class="row_8">{{locale.perPageNum}}</div>
+	</div>
+	<div class="rightConfig">
+		<div class="row_1"></div>
+		<div class="row_2"><input type="number" id="setSpacing" title="大于 0"> px</div>
+		<div class="row_3"><input type="checkbox" id="selectHighlight"></div>
+		<div class="row_4"><input type="checkbox" id="hoverHighlight"></div>
+		<div class="row_5"><input type="checkbox" id="sortable"></div>
+		<div class="row_6"><input type="checkbox" id="pagination"></div>
+		<div class="row_7">
+			<select id="pagerPos">
+				<option value="left">{{locale.left}}</option>
+				<option value="center">{{locale.center}}</option>
+				<option value="right">{{locale.right}}</option>
+			</select>
+		</div>
+		<div class="row_8"><input type="number" id="perPageNum" title="大于 1"></div>
+	</div>
+</div>

@@ -1,0 +1,156 @@
+{
+  "implementer": "ZPage",
+  "modal": "",
+  "title": "",
+  "ehandlers": {},
+  "firstFrameNo": 10,
+  "frames": {
+    "10": {
+      "no": 10,
+      "implementer": "ZFrame",
+      "mainWinNo": "",
+      "ehandlers": {},
+      "windows": {
+        "11": {
+          "no": 11,
+          "implementer": "ZWindow",
+          "width": "54%",
+          "height": "100%",
+          "top": true,
+          "bar": "bottom",
+          "btnAlign": "center",
+          "title": "",
+          "dTitle": "",
+          "x": "10",
+          "y": "0",
+          "resizable": false,
+          "draggable": false,
+          "autoAffected": true,
+          "buttons": [],
+          "ehandlers": {},
+          "widgetName": "data-widget",
+          "widgetVersion": "0.0.0",
+          "widgetProfile": {
+            "sourceId": "1524905928763",
+            "setSpacing": 10,
+            "selectHighlight": true,
+            "hoverHighlight": true,
+            "sortable": true,
+            "pagination": false,
+            "pagerPos": "right",
+            "perPageNum": 6,
+            "tpl": {
+              "width": 444,
+              "height": 216,
+              "imgs": [
+                {
+                  "src": "@img@",
+                  "left": 5,
+                  "top": 5,
+                  "unitId": "pic1524906135561",
+                  "width": 80,
+                  "height": 80,
+                  "opacity": 1,
+                  "borderRadius": 2
+                }
+              ],
+              "titles": [
+                {
+                  "src": "@title@",
+                  "left": 97,
+                  "top": 11,
+                  "unitId": "title1524906153007",
+                  "fontSize": 20,
+                  "fontFamily": "arial",
+                  "fontWeight": 600,
+                  "letterSpacing": 1
+                }
+              ],
+              "paras": [
+                {
+                  "src": "@para@",
+                  "left": 93,
+                  "top": 75,
+                  "unitId": "para1524906168585",
+                  "width": 322,
+                  "height": 120,
+                  "fontSize": 20,
+                  "fontFamily": "fantasy",
+                  "fontWeight": 600,
+                  "lineSpacing": 5,
+                  "opacity": 1,
+                  "hasBorder": true
+                }
+              ],
+              "icons": [
+                {
+                  "src": "fab fa-github",
+                  "left": 401,
+                  "top": 10,
+                  "unitId": "icon1524906190683",
+                  "fontSize": 30
+                }
+              ],
+              "buttons": [
+                {
+                  "showIcon": true,
+                  "icon": "fab fa-twitter",
+                  "text": "New button",
+                  "unitId": "button1524906228030"
+                },
+                {
+                  "showIcon": true,
+                  "icon": "fab fa-twitter",
+                  "text": "New button",
+                  "unitId": "button1524906228697"
+                }
+              ]
+            }
+          },
+          "datasources": {
+            "1524905928763": {
+              "id": 1524905928763,
+              "type": "static",
+              "query": "[{\n\t\"img\": \"https://tse4-mm.cn.bing.net/th?id=OIP.dp6UKpPrpe3xc6OVEKFyiQHaHa&w=208&h=208&c=7&o=5&pid=1.7\",\n\t\"title\": \"标题-1\",\n\t\"para\": \"When you really love someone, age,miles,height,weight are just numbers.\"\n}, {\n\t\"img\": \"https://tse2-mm.cn.bing.net/th?id=OIP.W0A49kvYUm2vBXEYqVlAMQHaHa&w=211&h=211&c=7&o=5&pid=1.7\",\n\t\"title\": \"标题-2\",\n\t\"para\": \"Life is unexplainable, so don't try to explain it. Just live it.s\"\n}, {\n\t\"img\": \"https://tse2-mm.cn.bing.net/th?id=OIP.QJUIg5vW91xrjmZqLKjD9gHaHa&w=193&h=193&c=7&o=5&pid=1.7\",\n\t\"title\": \"标题-3\",\n\t\"para\": \"Worry is a total waste of time. It doesn’t change anything. All it does is steal your joy and keep you very busy doing nothing.\"\n}, {\n\t\"img\": \"https://tse4-mm.cn.bing.net/th?id=OIP.RI_CbsJm61h4Us83fiUFEgAAAA&w=212&h=212&c=7&o=5&pid=1.7\",\n\t\"title\": \"标题-4\",\n\t\"para\": \"Nobody can take away your pain, so don't let anyone take away your happiness. \"\n}, {\n\t\"img\": \"https://tse3-mm.cn.bing.net/th?id=OIP.m1jVkZ8WKaZfMPqQszfcpwHaHa&w=195&h=195&c=7&o=5&pid=1.7\",\n\t\"title\": \"标题-5\",\n\t\"para\": \"Don't be afraid of pleasure.Remember that Pressure is what turns a lump of coal into a diamond.\"\n}, {\n\t\"img\": \"https://tse4-mm.cn.bing.net/th?id=OIP.PcteWY1ISuK56PUjsHjh8AHaHa&w=193&h=192&c=7&o=5&pid=1.7\",\n\t\"title\": \"标题-6\",\n\t\"para\": \"It's not true we are taking different paths. You've always been my path, and you will always be.\"\n}, {\n\t\"img\": \"https://tse4-mm.cn.bing.net/th?id=OGC.0d165220b6d548db05f3b54d2914782a&pid=1.7&rurl=http%3a%2f%2fp.kengdie.com%2ftouxiang%2f02%2f53%2f131446387.gif&ehk=SmSq8dgppPSTsJ9oH0PoCA\",\n\t\"title\": \"标题-7\",\n\t\"para\": \"“Everything negative-pressure，challenges-is all an opportunity for me to rise。” \"\n}, {\n\t\"img\": \"https://tse2-mm.cn.bing.net/th?id=OIP.iyoKVhZJ04JsgpaSIKSV4wHaFr&w=276&h=212&c=7&o=5&pid=1.7\",\n\t\"title\": \"标题-8\",\n\t\"para\": \"In such a season , Such a day reminds me of you.\"\n}, {\n\t\"img\": \"https://tse2-mm.cn.bing.net/th?id=OIP.JDVJ-P8fTy6VIGOYKVhWlAAAAA&w=220&h=218&c=7&o=5&pid=1.7\",\n\t\"title\": \"标题-9\",\n\t\"para\": \"we can be anyone, we can do anything. it‘s only a matter of going.\"\n}, {\n\t\"img\": \"https://tse3-mm.cn.bing.net/th?id=OIP.vzvNWu7galMjnqp8mh1d4QHaHa&w=191&h=190&c=7&o=5&pid=1.7\",\n\t\"title\": \"标题-10\",\n\t\"para\": \"The only way to achieve the impossible is to believe it is possible.\"\n}, {\n\t\"img\": \"https://tse2-mm.cn.bing.net/th?id=OIP.t3r57o-gGOqZrxrbdeyZggHaHa&w=200&h=200&c=7&o=5&pid=1.7\",\n\t\"title\": \"标题-6\",\n\t\"para\": \"I spent so long in the darkness I'd almost forgotten how beautiful the moonlight is. \"\n}]",
+              "dataType": "json",
+              "mockEnabled": false,
+              "mock": "",
+              "localProcessEnabled": false,
+              "localProcess": "function(result) {\n\t//todo: \n\treturn result;\n}",
+              "params": []
+            }
+          },
+          "autoHeight": false,
+          "noTopBorder": true,
+          "noRightBorder": true,
+          "noLeftBorder": true,
+          "noBottomBorder": true,
+          "zIndex": "",
+          "vCenter": false,
+          "hCenter": false,
+          "paddingLeft": null,
+          "paddingRight": null,
+          "paddingTop": null,
+          "paddingBottom": null,
+          "corner": "square",
+          "regularRefresh": false,
+          "refreshInterval": null,
+          "titleAlign": "left",
+          "headHeight": 48,
+          "headFontSize": 16,
+          "headFontWeight": "bold",
+          "headIcon": "fas fa-puzzle-piece",
+          "highlightDTVar": true,
+          "topStyle": "default",
+          "closeBtn": false,
+          "refreshBtn": false,
+          "maximizeBtn": false,
+          "open": true
+        }
+      },
+      "containers": [],
+      "pageJump": {},
+      "dependencies": []
+    }
+  }
+}

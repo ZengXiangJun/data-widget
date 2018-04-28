@@ -1,0 +1,73 @@
+.variable-settings {
+  display: none;
+}
+.variable-settings p {
+  line-height: 20px;
+  margin-bottom: 6px;
+  padding: 2px;
+  box-sizing: border-box;
+}
+.variable-settings p .ui-icon {
+  float: left;
+  margin: 4px 0;
+}
+.variable-settings p .fa-search {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+}
+.variable-settings p .variable-filter {
+  width: 160px;
+}
+.variable-settings p.vs-error-tips {
+  display: none;
+}
+.variable-settings .variable-table {
+  width: 100%;
+}
+.variable-settings .variable-table td {
+  padding: 2px;
+}
+.variable-settings .variable-table td input.reserved {
+  border: none;
+  background: transparent;
+}
+.variable-settings .variable-table thead .name {
+  width: 168px;
+  height: 24px;
+}
+.variable-settings .variable-table thead .value {
+  width: 220px;
+}
+.variable-settings .variable-table thead .type {
+  width: 80px;
+}
+.variable-settings .variable-table thead .scope {
+  width: 100px;
+}
+.variable-settings .variable-table thead .operations {
+  width: 60px;
+}
+.variable-settings button.add-var {
+  margin: 8px 0;
+  width: 120px;
+}
+.var-settings-btn {
+  height: 32px;
+  width: 136px;
+  cursor: pointer;
+  line-height: 32px;
+  text-align: center;
+  font-size: 14px;
+  margin-right: 12px;
+  border-top: none !important;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -68px;
+}
+.var-settings-btn i {
+  margin-right: 4px;
+}
+

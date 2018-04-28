@@ -1,0 +1,257 @@
+html {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+body {
+    width: 100%;
+    height: 100%;
+    font-size: 62.5%;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+    border: none;
+    overflow: hidden;
+    .sourceWindow {
+        width: 73%;
+        height: 50%;
+        position: absolute;
+        left: 0%;
+        top: 0%;
+    }
+    .tplWindow {
+        -moz-user-select: none;  
+        -webkit-user-select: none;  
+        -ms-user-select: none;
+        user-select: none;
+        width: 73%;
+        height: 50%;
+        position: absolute;
+        left: 0%;
+        top: 50%;
+        border-sizing: border-box;
+        border-bottom: none;
+        border-right: none;
+        border-top: none;
+        font-size: 14px;
+        .left {
+            width: 33%;
+            height: 100%;
+            float: left;
+            box-sizing: border-box;
+            position: absolute;
+            left: 0;
+            top: 0%;
+            border-left: none;
+            border-bottom: none;
+            .topTitle {
+                width: 100%;
+                height: 25px;
+                line-height: 25px;
+                box-sizing: border-box;
+                padding-left: 15px;
+                border-width: 0;
+                i {
+                    margin-right: 9px;
+                    font-size: 15px;
+                }
+            }
+            .operate {
+                width: 100%;
+                height: 45px;
+                line-height: 45px;
+                text-align: center;
+                button {
+                    font-size: 13px;
+                    padding: 0px 8px;
+                }
+            }
+            .editWindow {
+                width: 100%;
+                height: calc(~"100% - 75px");
+                overflow-x: hidden;
+                overflow-y: auto;
+                .picEdit,.titleEdit,.paraEdit,.iconEdit,.buttonEdit {
+                    width: 100%;
+                    .left_wrap {
+                        width: 40%;
+                        height: 100%;
+                        float: left;
+                        div {
+                            font-size: 14px;
+                            width: 100%;
+                            height: 30px;
+                            line-height: 30px;
+                            box-sizing: border-box;
+                            padding-left: 20px;
+                            border: none;
+                        }
+                        .ui-state-hover {
+                            height: 22px;
+                            line-height: 22px;
+                        }
+                    }
+                    .right_wrap {
+                        width: 60%;
+                        height: 100%;
+                        float: left;
+                        div {
+                            font-size: 14px;
+                            width: 100%;
+                            height: 30px;
+                            line-height: 30px;
+                            box-sizing: border-box;
+                            border: none;
+                            input {
+                                outline: none;
+                            }
+                            button {
+                                padding: 0px 20px;
+                                font-size: 13px;
+                            }
+                            select {
+                                width: 132px;
+                                height: 21.4px;
+                                line-height: 21.4px;
+                                outline: none;
+                            }
+                            i {
+                                font-size: 15px;
+                            }
+                        }
+                        .ui-state-hover {
+                            height: 22px;
+                            line-height: 22px;
+                        }
+                    }
+                }
+                .picEdit,.titleEdit {
+                    height: 210px;
+                }
+                .paraEdit {
+                    height: 270px;
+                }
+                .iconEdit {
+
+                }
+                .buttonEdit {
+
+                }
+            }
+        }
+        .right {
+            width: 67%;
+            height: 100%;
+            float: left;
+            box-sizing: border-box;
+            position: absolute;
+            left: 33%;
+            top: 0%;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+            .topTitle {
+                width: 100%;
+                height: 25px;
+                line-height: 25px;
+                box-sizing: border-box;
+                padding-left: 15px;
+                border-width: 0;
+                i {
+                    margin-right: 9px;
+                    font-size: 15px;
+                }
+            }
+            .outerWrap_1 {
+                width: calc(~"100% - 20px");
+                height: calc(~"100% - 88px");
+                position: absolute;
+                left: 10px;
+                top: 35px;
+                .template {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    border-width: 0.5px;
+                    overflow: hidden;
+                    .picWrap {
+                        overflow: hidden;
+                    }
+                    .paraWrap {
+
+                    }
+                }
+            }
+            .outerWrap_2 {
+                border-width: 0.5px;
+                height: 38px;
+                line-height: 36px;
+                overflow: hidden;
+                position: absolute;
+                left: 10px;
+            }
+        }
+    }
+    .configWindow {
+        -moz-user-select: none;  
+        -webkit-user-select: none;  
+        -ms-user-select: none;
+        user-select: none;
+        width: 27%;
+        height: 100%;
+        position: absolute;
+        left: 73%;
+        top: 0%;
+        border-sizing: border-box;
+        border-right: none;
+        border-bottom: none;
+        .leftConfig {
+            width: 45%;
+            height: 100%;
+            float: left;
+            div {
+                padding-left: 25px;
+                overflow: hidden;
+            }
+            .row_1 {
+                padding-left: 5px;
+            }
+            .row_7,.row_8 {
+                padding-left: 45px;
+            }
+        }
+        .rightConfig {
+            width: 55%;
+            height: 100%;
+            float: left;
+            div {
+                input[type="number"] {
+                    width: 80px;
+                    outline: none;
+                    padding-left: 5px;
+                }
+                select {
+                    width: 89px;
+                    height: 24px;
+                    outline: none;
+                }
+            }
+        }
+        .leftConfig,.rightConfig {
+            div {
+                height: 35px;
+                line-height: 35px;
+                box-sizing: border-box;
+                font-size: 14px;
+                i {
+                    margin-right: 5px;
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}

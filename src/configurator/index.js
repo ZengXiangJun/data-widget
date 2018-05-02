@@ -198,7 +198,7 @@ var configurator = {
                     $('.edit').slideUp('fast');
                 },
                 containment: ".template",
-                minHeight: 80,
+                minHeight: 30,
                 minWidth: 100
             }).draggable({
                 start: function(){

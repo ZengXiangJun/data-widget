@@ -10,7 +10,7 @@
 ![](https://github.com/ZengXiangJun/data-widget/blob/master/imgs/img_1.png)
 
 ### 使用说明
-- 在[Ehancer](https://enhancer.io)上注册，新建项目使用此组件。
+- 在[Enhancer](https://enhancer.io)上注册，新建项目使用此组件。
 - 在图二界面设置组件的数据源，模板以及相关配置。
 
 ### 数据源设置

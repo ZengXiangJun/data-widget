@@ -308,6 +308,7 @@ const bs = new BrowserSyncPlugin({
   cors: true,
   open: 'external',
   notify: false,
+  https: true,
   server: { 
     baseDir: ['.'],
     index: 'preview/config.html',
@@ -346,6 +347,13 @@ const bs = new BrowserSyncPlugin({
           success: true,
           data: getMockData(match[1])
         }))
+        return
+      } else {
+        const match = url.match(/\/data-widget\/widget\/\d+\.\d+.\d+/);
+        if (match) {
+          fs.createReadStream(url.replace(/\/data-widget\/widget\/\d+\.\d+.\d+/, 'build/widget/')).pipe(res);
+          return
+        }
       }
       return next();
     }

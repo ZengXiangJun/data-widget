@@ -17,7 +17,6 @@ Enhancer.registerWidget({
                 height: 200
             }
         }, profile);
-        
         var that = this;
         var $container = this.getContainer();
         this.profile = profile;

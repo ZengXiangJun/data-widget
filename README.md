@@ -1,5 +1,5 @@
 ## Enhancer三方组件 data-widget 使用说明
-### 查看Demo 【账号】test 【密码】123456
+### 查看Demo 【账号】test  【密码】 123456
 ### 简介 [Demo](http://47.96.99.14:5301/#107)
 - data-widget是基于[Enhancer](https://enhancer.io)平台开发的组件, 能在此平台上良好运行。
 - data-widget通过自定义模板快速将数据生成成品。

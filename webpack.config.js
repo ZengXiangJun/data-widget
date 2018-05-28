@@ -308,7 +308,7 @@ const bs = new BrowserSyncPlugin({
   cors: true,
   open: 'external',
   notify: false,
-  https: true,
+  https: false,
   server: { 
     baseDir: ['.'],
     index: 'preview/config.html',

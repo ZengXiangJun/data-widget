@@ -45,7 +45,7 @@ module.exports = function(type, tpl, data) {
     }
     if (type === 'pic') {
         content = `<div class="picWrap unit" style="width:${tpl.width}px;
-        height:${tpl.height}px;border-radius:${tpl.borderRadius}%; 
+        height:${tpl.height}px;border-radius:${tpl.borderRadius}%;overflow:hidden;
         position:absolute;left:${tpl.left}px;top:${tpl.top}px;opacity:${tpl.opacity}" 
         unitId="${tpl.unitId}" src="${dataConver(tpl.src, data)}">
         <img src="${dataConver(tpl.src, data)}" style="width:100%;height:100%"></div>`;

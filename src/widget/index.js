@@ -24,9 +24,7 @@ Enhancer.registerWidget({
         that.affected(1);
         //选中高亮
         $container.on('click', '.singleWrap', function() {
-            $container.find('.singleWrap').map(function() {
-                $(this).attr('isCurr', 'false')
-            })
+            $container.find('.singleWrap').attr('isCurr', 'false');
             $(this).attr('isCurr', 'true');
             that.trig('onUnitClick');
             if (profile.selectHighlight) {
@@ -68,6 +66,7 @@ Enhancer.registerWidget({
         }
         //点击按钮
         $container.on('click', '.buttonWrap', function() {
+            $container.find('.singleWrap').attr('isCurr', 'false');
             $container.find('.buttonWrap').attr('isCurrButton', 'false');
             $(this).attr('isCurrButton', 'true').parents('.singleWrap').attr('isCurr', 'true');
             that.trig($(this).attr('unitid'));

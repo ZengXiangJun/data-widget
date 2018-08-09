@@ -69,7 +69,7 @@ Enhancer.registerWidget({
         //点击按钮
         $container.on('click', '.buttonWrap', function() {
             $container.find('.buttonWrap').attr('isCurrButton', 'false');
-            $(this).attr('isCurrButton', 'true');
+            $(this).attr('isCurrButton', 'true').parents('.singleWrap').attr('isCurr', 'true');
             that.trig($(this).attr('unitid'));
         })
         //前一页跳转

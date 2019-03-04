@@ -329,6 +329,7 @@ var configurator = {
             pagination: false,
             pagerPos: 'right',
             perPageNum: 6,
+            centerButton: false,
             tpl: {
                 width: 300,
                 height: 200,
@@ -354,6 +355,7 @@ var configurator = {
         $('#pagination').prop('checked', profile.pagination);
         $('#pagerPos').val(profile.pagerPos);
         $('#perPageNum').val(profile.perPageNum);
+        $('#centerButton').prop('checked', profile.centerButton);
         if (!profile.pagination) {
             $('#pagerPos,#perPageNum').attr('disabled', true);
         };
@@ -416,6 +418,7 @@ var configurator = {
                 pagination: $('#pagination').prop('checked'),
                 pagerPos: $('#pagerPos').val(),
                 perPageNum: parseInt($('#perPageNum').val()),
+                centerButton: $('#centerButton').prop('checked'),
                 tpl: {
                     width: $('.template').width(),
                     height: $('.template').height(),

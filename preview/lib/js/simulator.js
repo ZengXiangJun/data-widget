@@ -1,5 +1,6 @@
 /* Variable Manager */
-var VariableWhiteList = {
+var VariableWhiteList =  {
+  'BASE_URL': true,
   'CURR_YEAR': true,
   'CURR_MONTH': true,
   'CURR_DATE': true,
@@ -8,9 +9,6 @@ var VariableWhiteList = {
   'CURR_MM': true,
   'CURR_DD': true,
   'CURR_YMD': true,
-  'USER_ID': true,
-  'USER_NAME': true,
-  'ROLES': true,
   'LAST_YEAR': true,
   'LAST_MONTH': true,
   'LAST_MM': true,
@@ -21,6 +19,15 @@ var VariableWhiteList = {
   'NEXT_MM': true,
   'TOMORROW': true,
   'TOMORROW_YMD': true,
+
+  'USER_ID': true,
+  'USER_NAME': true,
+  'ROLES': true,
+  'ROLE_DISPLAY_NAMES': true,
+  'IP': true,
+  'UA':  true,
+
+  '0-BASE_URL': true,
   '0-CURR_YEAR': true,
   '0-CURR_MONTH': true,
   '0-CURR_DATE': true,
@@ -39,9 +46,13 @@ var VariableWhiteList = {
   '0-NEXT_MM': true,
   '0-TOMORROW': true,
   '0-TOMORROW_YMD': true,
+
   '1-USER_ID': true,
   '1-USER_NAME': true,
-  '1-ROLES': true
+  '1-ROLES': true,
+  '1-ROLE_DISPLAY_NAMES': true,
+  '1-IP': true,
+  '1-UA':  true
 };
 
 var VariableManager = {
@@ -63,6 +74,7 @@ var VariableManager = {
         return date.toISOString().split('T')[0];
       }
       envVars = {
+        'BASE_URL': '/',
         'CURR_YEAR': d.getFullYear(),
         'CURR_MONTH': m + 1,
         'CURR_DATE': dt,
@@ -71,9 +83,6 @@ var VariableManager = {
         'CURR_MM': xx(m + 1),
         'CURR_DD': xx(dt),
         'CURR_YMD': ymd(d),
-        'USER_ID': 'zhangsan',
-        'USER_NAME': 'zhangsan',
-        'ROLES': 'admin',
         'LAST_YEAR': d.getFullYear() - 1,
         'LAST_MONTH': lm,
         'LAST_MM': xx(lm),
@@ -84,6 +93,32 @@ var VariableManager = {
         'NEXT_MM': xx(nm),
         'TOMORROW': nd.getDate(),
         'TOMORROW_YMD': ymd(nd),
+        
+        'USER_ID': 'zhangsan',
+        'USER_NAME': '张三',
+        'ROLES': '',
+        'ROLE_DISPLAY_NAMES': '<无角色>',
+        'IP': '1.2.3.4',
+        'UA': {
+            isDesktop: true,
+            browser: 'enhancer_chrome',
+            version: '63.40.951',
+            os: 'Windows 10',
+            platform: 'Windows'
+        },
+        '1-USER_ID': 'zhangsan',
+        '1-USER_NAME': '张三',
+        '1-ROLES': '',
+        '1-ROLE_DISPLAY_NAMES': '<无角色>',
+        '1-IP': '1.2.3.4',
+        '1-UA': {
+            isDesktop: true,
+            browser: 'enhancer_chrome',
+            version: '63.40.951',
+            os: 'Windows 10',
+            platform: 'Windows'
+        },
+        '0-BASE_URL': '/',
         '0-CURR_YEAR': d.getFullYear(),
         '0-CURR_MONTH': m + 1,
         '0-CURR_DATE': dt,
@@ -102,9 +137,6 @@ var VariableManager = {
         '0-NEXT_MM': xx(nm),
         '0-TOMORROW': nd.getDate(),
         '0-TOMORROW_YMD': ymd(nd),
-        '1-USER_ID': 'zhangsan',
-        '1-USER_NAME': 'zhangsan',
-        '1-ROLES': 'admin'
       };
       localStorage.setItem('envVars', JSON.stringify(envVars));
       window.location.reload();
@@ -123,29 +155,29 @@ var VariableManager = {
       return that.$dlg.dialog('open');
     }
 
-    var html = `<div class="variable-settings">
-                <p class="vs-tips ui-state-highlight">
-                    <span class="ui-icon ui-icon-info"></span>
-                    <span>【客户端变量】必须由数字、下划线、单词组成，比如：1-CURR-YEAR；【服务端变量】必须由单词组成，比如：USER_ID。</span>
-                </p>
-                <p><i class="fa fa-search"></i>
-                    <input class="variable-filter" type="text">
-                </p>
-                <p class="vs-error-tips ui-state-error"></p>
-                <table class="variable-table" class="ui-widget-content">
-                    <thead>
-                        <tr class="ui-state-default">
-                            <td class="name">变量名</td>
-                            <td class="value">值</td>
-                            <td class="type">类型</td>
-                            <td class="scope">域</td>
-                            <td class="operations">操作</td>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <button class="add-var">添加变量</button>
-            </div>`;
+    var html = '<div class="variable-settings">\
+                <p class="vs-tips ui-state-highlight">\
+                    <span class="ui-icon ui-icon-info"></span>\
+                    <span>【客户端变量】必须由数字、下划线、单词组成，比如：1-CURR-YEAR；【服务端变量】必须由单词组成，比如：USER_ID。</span>\
+                </p>\
+                <p><i class="fa fa-search"></i>\
+                    <input class="variable-filter" type="text">\
+                </p>\
+                <p class="vs-error-tips ui-state-error"></p>\
+                <table class="variable-table" class="ui-widget-content\
+                    <thead>\
+                        <tr class="ui-state-default">\
+                            <td class="name">变量名</td>\
+                            <td class="value">值</td>\
+                            <td class="type">类型</td>\
+                            <td class="scope">域</td>\
+                            <td class="operations">操作</td>\
+                        </tr>\
+                    </thead>\
+                    <tbody></tbody>\
+                </table>\
+                <button class="add-var">添加变量</button>\
+            </div>';
 
     $('body').append(html);
 
@@ -366,14 +398,15 @@ VariableManager.init();
 
 /* Hack */
 Enhancer.simulatorHack = Enhancer.simulatorHack || {};
+var lang = $.cookie('lang') || 'zh-cn';
 Enhancer.simulatorHack.getScriptPath = function (name) {
   if (name.indexOf('/data-widget') !== -1) {
-    return location.origin + '/build/widget/zh-cn/index.js';
+    return location.origin + '/build/widget/' + lang + '/index.js';
   }
   return name;
 }
 Enhancer.simulatorHack.getWidgetName = function () {
-  return 'data-widget/0.0.0';
+  return componentName || 'data-widget/0.0.0';
 }
 //Enhancer.WIDGET_BASE_URL = 'http://widget-assets.enhancer.cc/widget-store/';
 Enhancer.WIDGET_BASE_URL = 'http://widget-assets.enhancer.io/';
@@ -399,6 +432,27 @@ Enhancer.ZPageManager.getPageProf = function(pid, callback) {
     callback(profile);
   })  
 };
+
+var oldGetWidgetBaseUrl = Enhancer.getWidgetBaseUrl.bind(Enhancer);
+var componentName;
+Enhancer.getWidgetBaseUrl = function (name) {
+
+  if (name.indexOf('data-widget/') === 0) {
+    componentName = name;
+    return location.origin + '/build/widget';
+  }
+
+  return oldGetWidgetBaseUrl(name);
+}
+
+Enhancer.getStaticResourceUrl = function (name) {
+  var staticAssets = {};
+  try {
+    staticAssets = JSON.parse(localStorage.getItem('staticAssets') || '{}')
+  } catch (e) {
+  }
+  return staticAssets[name];
+}
 
 var ZMessage = Enhancer.ZMessage;
 Enhancer.IO.getSourceData = function(sourceId, criteria, callback, errCallback) {
@@ -496,4 +550,105 @@ $(function() {
     .on('click', function() {
       VariableManager.open();
     });
+
+
+  var lang = $.cookie('lang');
+  lang = lang || 'zh-cn';
+  $('#header span.logout').off('click').click(function () {
+    var lang = $.cookie('lang');
+    lang = lang || 'zh-cn';
+    $.cookie('lang', lang === 'zh-cn' ? 'en' : 'zh-cn', {
+        path: '/',
+        expires: new Date('2120-12-01 00:00:00')
+    });
+    window.location.reload(true);
+  }).html('<i class="fas fa fa-globe"></i>' + (lang === 'zh-cn' ? 'English' : '中文'))
+
+  $('#header span.logout .fa').removeClass('fa-sign-out-alt').addClass('fa-globe')
+
+
+  var lastThemeName = 'base';
+  var themeName = $.cookie('theme');
+  if (themeName) {
+    var $theme = $('#theme')
+    var href = $theme.attr('href').replace(lastThemeName, themeName);
+    $theme.attr('href', href)
+    .attr('themename', themeName);
+    $("body").attr("theme", themeName);
+  }
+  setTimeout(function () {
+    var match = window.location.href.match(/[&?]id=([^&]+)/);
+    var id = match ? match[1] : 2;
+    $('.menu li[isleaf=Y] a[navto="' + id + '"]').click();
+  }, 10);
+
+
+
+
+  Enhancer.CssVar = {
+    vars: { enhancer: []},
+    support: window.CSS && window.CSS.supports && window.CSS.supports('--a', 0),
+    transform: function (css, widgetName) {
+      if (this.support) {
+        return css;
+      }
+
+      const vars = widgetName ? this.vars.enhancer.concat(this.vars[widgetName] || [])  : this.vars.enhancer
+      vars.forEach(function (item) {
+        var getterRegex = new RegExp('var\\(\\s*' + item.key + '\\s*\\)', 'g');
+        css = css.replace(getterRegex, item.value);
+      });
+      
+      return css;
+    },
+    parseVars: function (style, widgetName, force) {
+      this.vars[ widgetName || 'enhancer'] = style.match(/(--.+:.+;)/g).map(function (item) {
+        const parts = item.split(':')
+        return {
+          key: parts[0],
+          value: parts[1].trim().replace(/;$/, '')
+        }
+      });
+      force !== false && this.update(widgetName);
+    },
+    bind: function (dom, widgetName) {
+      if (this.support) {
+        return
+      }
+      var me = this;
+      dom = $(dom);
+
+      if (dom.prop('tagName').toLowerCase() === 'style') {
+        me.parseVars(dom.html() || '', widgetName);
+      } else {
+        me.getLink(dom.attr('href'), function (style) {
+          me.parseVars(style || '', widgetName);
+          dom.on('load', function () {
+            me.getLink(this.href, function (style) {
+               me.parseVars(style || '', widgetName);
+            })
+          })
+        }) 
+      }
+    },
+    update: function (widgetName) {
+      var me = this;
+      const attr = !widgetName || widgetName === 'enhancer' ? '' : '="' + widgetName + '"';
+      $('style[css-var-transform' + attr + ']').each(function () {
+        this.innerHTML = me.transform(this.innerHTML);
+      });
+    },
+    getLink: function(url, success) {
+      var request = new XMLHttpRequest();
+      request.open('GET', url, true);
+      request.overrideMimeType('text/css;');
+      request.onload = function() {
+        if (request.status >= 200 && request.status < 400) {
+          success(request.responseText);
+        } 
+      };
+      request.send();
+    }
+  }
+  Enhancer.CssVar.bind($('#theme'));
 });

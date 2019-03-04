@@ -188,7 +188,10 @@ Enhancer.registerWidget({
             $container.find('.singleWrap').map(function(index) {
                 $(this).data('eachData', data[index]);
             })
-            $container.find('.buttonWrap ').button();
+            $container.find('.buttonWrap').button();
+            if (profile.centerButton) {
+                $container.find('.bottomWrap').css('text-align', 'center');
+            }
             if (profile.pagination) {
                 $container.find('.content').css('max-height', 'calc(100% - 40px)');
                 $container.find('.page').html(render('page', locale, {

@@ -59,5 +59,6 @@ module.exports = {
     SELECTED_UNITS_INDEX: '选中部件数据',
     LAST_SELECTED_UNIT_INDEX: '最后选中部件序号',
     BUTTON_EVENT_ID: '按钮事件ID',
-    BUTTON_EVENT_NAME: '按钮事件名称'
+    BUTTON_EVENT_NAME: '按钮事件名称',
+    centerButton: '按钮居中'
 };

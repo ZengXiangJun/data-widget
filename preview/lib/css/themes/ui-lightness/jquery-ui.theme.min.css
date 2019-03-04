@@ -1,4 +1,33 @@
-/*! jQuery UI - v1.12.1 - 2017-04-21
+[theme=ui-lightness] {
+
+  --ui-widget-ui-widget-content-border-corlor: 204, 204, 204;
+  --ui-widget-content-border-corlor: 204, 204, 204;
+  --ui-widget-content-background-corlor: 255, 255, 255;
+  --ui-widget-content-corlor: 51, 51, 51;
+  --ui-widget-header-border-corlor: 231, 143, 8;
+  --ui-widget-header-background-corlor: 246, 168, 40;
+  --ui-widget-header-corlor: 255, 255, 255;
+  --ui-state-default-border-corlor: 204, 204, 204;
+  --ui-state-default-background-corlor: 246, 246, 246;
+  --ui-state-default-corlor: 28, 148, 196;
+  --ui-state-hover-border-corlor: 251, 203, 9;
+  --ui-state-hover-background-corlor: 253, 245, 206;
+  --ui-state-hover-corlor: 199, 116, 5;
+  --ui-state-active-border-corlor: 251, 216, 80;
+  --ui-state-active-background-corlor: 255, 255, 255;
+  --ui-state-active-corlor: 235, 143, 0;
+  --ui-state-highlight-border-corlor: 254, 210, 47;
+  --ui-state-highlight-background-corlor: 255, 228, 92;
+  --ui-state-highlight-corlor: 54, 54, 54;
+  --ui-state-error-border-corlor: 205, 10, 10;
+  --ui-state-error-background-corlor: 184, 25, 0;
+  --ui-state-error-corlor: 255, 255, 255;
+  --ui-widget-overlay-background-corlor: 102, 102, 102;
+  --ui-widget-shadow-corlor: 0, 0, 0;
+}
+
+ 
+ /*! jQuery UI - v1.12.1 - 2017-04-21
 * http://jqueryui.com
 * Copyright jQuery Foundation and other contributors; Licensed MIT */
 

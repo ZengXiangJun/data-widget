@@ -1,4 +1,33 @@
-/*! jQuery UI - v1.12.1 - 2017-04-22
+[theme=excite-bike] {
+
+  --ui-widget-ui-widget-content-border-corlor: 255, 255, 255;
+  --ui-widget-content-border-corlor: 170, 170, 170;
+  --ui-widget-content-background-corlor: 238, 238, 238;
+  --ui-widget-content-corlor: 34, 34, 34;
+  --ui-widget-header-border-corlor: 204, 204, 204;
+  --ui-widget-header-background-corlor: 249, 249, 249;
+  --ui-widget-header-corlor: 230, 151, 0;
+  --ui-state-default-border-corlor: 255, 255, 255;
+  --ui-state-default-background-corlor: 20, 132, 230;
+  --ui-state-default-corlor: 255, 255, 255;
+  --ui-state-hover-border-corlor: 34, 147, 247;
+  --ui-state-hover-background-corlor: 34, 147, 247;
+  --ui-state-hover-corlor: 255, 255, 255;
+  --ui-state-active-border-corlor: 230, 151, 0;
+  --ui-state-active-background-corlor: 230, 151, 0;
+  --ui-state-active-corlor: 255, 255, 255;
+  --ui-state-highlight-border-corlor: 255, 255, 255;
+  --ui-state-highlight-background-corlor: 197, 221, 252;
+  --ui-state-highlight-corlor: 51, 51, 51;
+  --ui-state-error-border-corlor: 230, 151, 0;
+  --ui-state-error-background-corlor: 230, 151, 0;
+  --ui-state-error-corlor: 255, 255, 255;
+  --ui-widget-overlay-background-corlor: 230, 185, 0;
+  --ui-widget-shadow-corlor: 230, 151, 0;
+}
+
+ 
+ /*! jQuery UI - v1.12.1 - 2017-04-22
 * http://jqueryui.com
 * Copyright jQuery Foundation and other contributors; Licensed MIT */
 

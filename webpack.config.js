@@ -1,7 +1,6 @@
 const path = require('path');
 const fs = require('fs');
 const fse = require('fs-extra');
-const open = require('open');
 const webpack = require('webpack');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const ROOT_PATH = __dirname;
@@ -20,6 +19,12 @@ let ret = [];
     }
   });
 
+  const styleLoaderOptions = key === 'widget' ?  {
+    /* 如果用到了官方提供的 jquery ui 相关的 css 变量，就把下面两个属性打开 */
+    // attrs: {'css-var-transform': 'data-widget'},
+    // transform: 'css-var-transform'
+  } : {};
+
   ret = ret.concat(files.map((item) => {
     const lang = item.split('.')[1];
 
@@ -31,7 +36,9 @@ let ret = [];
       },
       output: {
         path: `${BUILD_PATH}/${key}/${lang}`,
-        filename: "[name].js"
+        filename: "[name].js",
+        publicPath: `/build/${key}/${lang}/`,
+        chunkFilename:'[name].js'
       },
       devServer: {
         contentBase: "./src"
@@ -45,7 +52,9 @@ let ret = [];
       externals: {
         react: 'window.React',
         'react-dom': 'window.ReactDOM',
-        $: 'window.jQuery'
+        $: 'window.jQuery',
+        jquery: 'window.jQuery',
+        moment: 'window.moment'
       },
       module: {
         rules: [{
@@ -54,11 +63,17 @@ let ret = [];
           include: path.join(ROOT_PATH, 'src')
         }, {
           test: /\.css$/,
-          use: ['style-loader', 'css-loader']
+          use: [{
+            loader: 'style-loader',
+            options: styleLoaderOptions
+          }, {
+            loader: 'css-loader'
+          }]
         }, {
           test: /\.less$/,
           use: [{
-            loader: 'style-loader'
+            loader: 'style-loader',
+            options: styleLoaderOptions
           }, {
             loader: 'css-loader'
           }, { 
@@ -73,6 +88,7 @@ let ret = [];
             loader: 'url-loader',
             options: {
               limit: 25000,
+              name: '../image/[name].[ext]'
             }
           }
         }, {
@@ -130,7 +146,7 @@ function getCustomData() {
   const custom = require(customPath);
   return custom;
 }
-function generateMockDate(id, name) {
+function generateMockData(id, name) {
   id = parseInt(id, 10);
   if (!id) {
     process.exit(0);
@@ -190,24 +206,30 @@ function uploadFile (req, res) {
       files[key].forEach((file) => {
         data.push({
           filename: file.originalFilename,
+          originalFilename: file.originalFilename,
+          size: file.size || file.headers.size,
           url: '/' + file.path
         })
       })
-    })
+    });
+    res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({success:true, data: {files: data}}));
   });
 }
 
 function getConfigurator (req, res) {
   /// hack
+  const cookie = req.headers.cookie || '';
+  const match = cookie.match(/lang=([^;]+)/);
+  const lang  = match ? match[1] : 'zh-cn';
   let html = fs.readFileSync('./src/configurator/configurator.html', 'utf8');
   const css = `<link type="text/css" href="/preview/lib/css/jquery-ui.structure.min.css" rel="stylesheet">
     <link id="theme" themename="base" type="text/css" href="/preview/lib/css/themes/base/jquery-ui.theme.min.css" rel="stylesheet" >
-    <link type="text/css" href="/preview/lib/css/jquery.ambiance.css" rel="stylesheet">`;
+    <link type="text/css" href="/preview/lib/css/jquery.ambiance.css" rel="stylesheet"></head>`;
 
   const js = `<script src="/preview/lib/js/jquery.ambiance.js"></script>
     <script src="/preview/platform_config.js"></script>
-    <script src="/build/configurator/zh-cn/index.js"></script>
+    <script src="/build/configurator/${lang}/index.js"></script>
     <script src="/preview/lib/js/platform_config_extra.js"></script>`;
 
   html = html.replace(/<\/\s*head>/, css);
@@ -233,24 +255,6 @@ function doSave(res, data, id, custom) {
 }
 
 function saveProfile (req, res, body) {
-  if (body.type === 'list') {
-    const custom = getCustomData();
-    const id = custom.length + 2;
-    const ret = generateMockDate(id, body.data.name);
-    const win = ret.frames[10].windows[11];
-    win.widgetProfile = body.data.config;
-    if (body.data.data && body.data.data.length) {
-      win.datasources = {};
-      body.data.data.forEach((item) => {
-        win.datasources[item.id] = item;
-      });
-    }
-    custom.push({
-      id: id,
-      name: body.data.name
-    });
-    return doSave(res, ret, id, custom);
-  }
 
   if (body.type === 'remove') {
     const custom = getCustomData();
@@ -269,8 +273,38 @@ function saveProfile (req, res, body) {
     return res.end(JSON.stringify({success: false}));
   } 
 
+  if (body.type === 'list') {
+    const custom = getCustomData();
+    const id = custom.length + 2;
+    const mock = generateMockData(id, body.data.name);
+    const win = mock.frames[10].windows[11];
+    win.widgetProfile = body.data.config;
+
+    const winbak = ret.frames[10].windows[11] || {};
+    Object.keys(winbak.datasources || {}).forEach((id) => {
+      win.datasources = win.datasources || {};
+      win.datasources[id] = winbak.datasources[id];
+    });
+    win.dependencies = winbak.dependencies || [];
+
+    if (body.data.data && body.data.data.length) {
+      win.datasources = win.datasources || {};
+      body.data.data.forEach((item) => {
+        win.datasources[item.id] = item;
+      });
+    }
+    custom.push({
+      id: id,
+      name: body.data.name
+    });
+    return doSave(res, mock, id, custom);
+  }
+
+  
+
   if (body.type === 'addSource' || body.type === 'setSource') {
     const win = ret.frames[10].windows[11];
+    win.datasources = win.datasources || {};
     win.datasources[body.data.id] = body.data;
     return doSave(res, ret, match[1]);
   }
@@ -284,6 +318,12 @@ function saveProfile (req, res, body) {
   if (body.type === 'config') {
     const win = ret.frames[10].windows[11];
     win.widgetProfile = body.data;
+    if (match[1] == 101) {
+      ret.frames[10].windows[12].widgetProfile = JSON.parse(JSON.stringify(body.data))
+    }
+    if (body.ext) {
+      win.dependencies = body.ext.dependencies || [];
+    }
     return doSave(res, ret, match[1]);
   }
 
@@ -297,74 +337,90 @@ function saveProfile (req, res, body) {
     body.data.forEach((item) => {
       win.datasources[item.id] = item;
     });
+    if (match[1] == 101) {
+      const win12 = ret.frames[10].windows[12];
+      win12.datasources = win12.datasources || {};
+      body.data.forEach((item) => {
+        win12.datasources[item.id] = JSON.parse(JSON.stringify(item));
+      });
+    }
     return doSave(res, ret, match[1]);
   }
 }
 
 
-const bs = new BrowserSyncPlugin({
-  host: '127.0.0.1',
-  port: 8001,
-  cors: true,
-  open: 'external',
-  notify: false,
-  https: false,
-  server: { 
-    baseDir: ['.'],
-    index: 'preview/config.html',
-    files: ['src/**/*.js', 'src/**/*.less', 'src/**/*.html'],
-    middleware: function(req, res, next) {
-      res.setHeader('set-cookie', 'lang=zh-cn');
-      const url = req.url.split('?')[0];
-      if (url === '/profile') {
-        res.writeHead(200, {
-          'Content-Type': 'application/json' 
-        });
-        
-        if (req.method === 'GET') {
-          return getProfile(req, res);
-        } else if (req.method === 'POST') {
-          let body = '';
-          req.on('data', function (data) {
-             body += data;
+
+module.exports = function (env) {
+  const bs = new BrowserSyncPlugin({
+    host: '127.0.0.1',
+    port: 8001,
+    cors: true,
+    open: 'external',
+    notify: false,
+    https: env ? env.https : false,
+    server: { 
+      baseDir: ['.'],
+      index: 'preview/config.html',
+      files: ['src/**/*.js', 'src/**/*.less', 'src/**/*.html'],
+      middleware: function(req, res, next) {
+        const url = req.url.split('?')[0];
+        if (url === '/profile') {
+          res.writeHead(200, {
+            'Content-Type': 'application/json' 
           });
-          req.on('end', function () {
-            body = JSON.parse(body);
-            saveProfile(req, res, body);
+          
+          if (req.method === 'GET') {
+            return getProfile(req, res);
+          } else if (req.method === 'POST') {
+            let body = '';
+            req.on('data', function (data) {
+               body += data;
+            });
+            req.on('end', function () {
+              body = JSON.parse(body);
+              saveProfile(req, res, body);
+            });
+          }
+          return;
+        } else if (url === '/upload') {
+          return uploadFile(req, res);
+        } else if (url === '/src/configurator/configurator.html') {
+          return getConfigurator(req, res);
+        }else if (url === '/preview/simulator.html') {
+          const cookie = req.headers.cookie || '';
+          const match = cookie.match(/lang=([^;]+)/);
+          const lang = match ? match[1] : 'zh-cn';
+          let html = fs.readFileSync('./preview/simulator.html', 'utf8');
+          const preview = `<script src="./lib/js/previewer.${lang}.js"></script>`;
+          return res.end(html.replace(/<script\s*src="\.\/lib\/js\/previewer\.zh-cn\.js"\s*>\s*<\/\s*script>/, preview));
+        } else if (url === '/all') {
+          res.writeHead(200, {
+            'Content-Type': 'application/json' 
           });
+          const match = req.url.match(/[&?]id=([^&]+)/);
+          res.end(JSON.stringify({
+            success: true,
+            data: getMockData(match[1])
+          }))
+        } else {
+          const match = url.match(/^\/build\/configurator\/[^/]+\/index\.html/);
+          if (match) {
+            fs.createReadStream('src/configurator/configurator.html').pipe(res);
+            return
+          }
         }
-        return;
-      } else if (url === '/upload') {
-        return uploadFile(req, res);
-      } else if (url === '/src/configurator/configurator.html') {
-        return getConfigurator(req, res);
-      } else if (url === '/all') {
-        res.writeHead(200, {
-          'Content-Type': 'application/json' 
-        });
-        const match = req.url.match(/[&?]id=([^&]+)/);
-        res.end(JSON.stringify({
-          success: true,
-          data: getMockData(match[1])
-        }))
-        return
-      } else {
-        const match = url.match(/\/data-widget\/widget\/\d+\.\d+.\d+/);
-        if (match) {
-          fs.createReadStream(url.replace(/\/data-widget\/widget\/\d+\.\d+.\d+/, 'build/widget/')).pipe(res);
-          return
-        }
+
+        return next();
       }
-      return next();
     }
-  }
-}, {
-  callback: function (err, bs) {
-    //const external = bs.getOptions().get('urls').get('external');
-    //open(`${external}/preview/widget.html`);
-  }
-})
-ret[0].plugins.push(bs);
-module.exports = ret;
+  }, {
+    callback: function (err, bs) {
+      //const external = bs.getOptions().get('urls').get('external');
+      //open(`${external}/preview/widget.html`);
+    }
+  })
+  ret[0].plugins.push(bs);
+  return ret;
+}
 
 

@@ -1,4 +1,33 @@
-/*! jQuery UI - v1.12.1 - 2017-04-22
+[theme=swanky-purse] {
+
+  --ui-widget-ui-widget-content-border-corlor: 54, 41, 23;
+  --ui-widget-content-border-corlor: 239, 236, 159;
+  --ui-widget-content-background-corlor: 68, 49, 19;
+  --ui-widget-content-corlor: 239, 236, 159;
+  --ui-widget-header-border-corlor: 186, 170, 90;
+  --ui-widget-header-background-corlor: 38, 24, 3;
+  --ui-widget-header-corlor: 234, 205, 134;
+  --ui-state-default-border-corlor: 54, 41, 23;
+  --ui-state-default-background-corlor: 79, 66, 33;
+  --ui-state-default-corlor: 248, 238, 201;
+  --ui-state-hover-border-corlor: 54, 41, 23;
+  --ui-state-hover-background-corlor: 103, 84, 35;
+  --ui-state-hover-corlor: 248, 238, 201;
+  --ui-state-active-border-corlor: 239, 236, 159;
+  --ui-state-active-background-corlor: 68, 49, 19;
+  --ui-state-active-corlor: 249, 242, 189;
+  --ui-state-highlight-border-corlor: 54, 41, 23;
+  --ui-state-highlight-background-corlor: 213, 172, 93;
+  --ui-state-highlight-corlor: 6, 2, 0;
+  --ui-state-error-border-corlor: 194, 102, 41;
+  --ui-state-error-background-corlor: 254, 228, 189;
+  --ui-state-error-corlor: 128, 63, 30;
+  --ui-widget-overlay-background-corlor: 55, 40, 6;
+  --ui-widget-shadow-corlor: 221, 212, 176;
+}
+
+ 
+ /*! jQuery UI - v1.12.1 - 2017-04-22
 * http://jqueryui.com
 * Copyright jQuery Foundation and other contributors; Licensed MIT */
 

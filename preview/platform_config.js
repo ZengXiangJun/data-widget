@@ -14,6 +14,72 @@
 		oldRegisterWidgetConfigurator.call(window.Enhancer, config);
 	}
 
+  Enhancer.getDatabaseConnectionNames = function (cb) {
+    console.warn('组件本地开发阶段不支持数据库连接,  请用静态数据源')
+    cb([]);
+  }
+   Enhancer.getDatabaseSettings = function (cb) {
+    console.warn('组件本地开发阶段不支持数据库连接,  请用静态数据源')
+    cb({});
+  }
+  Enhancer.VariablePattern = {
+    variableAndIdentifier: /(@(\d+-)?\w+(\.\w+)*@)|(\$(\d+-)?\w+(\.\w+)*\$)/g,
+    variable: /@(\d+-)?\w+(\.\w+)*@/g,
+    clientVariable: /(@\d+-\w+(\.\w+)*@)|(\$\d+-\w+(\.\w+)*\$)/g,
+    identifier: /\$(\d+-)?\w+(\.\w+)*\$/g,
+    varExp: /(#[^#]+#)|(@(\d+-)?\w+(\.\w+)*@((\.\w+)|(\[\s*\d+\s*\])|(\[\s*'[^']+'\s*\])|(\[\s*"[^"]+"\s*\]))+)/g,
+    isVariable: function(s) {
+      if (!s || typeof s !== 'string') {
+        return false;
+      }
+      return /(^@(\d+-)?\w+(\.\w+)*@$)|(^\$(\d+-)?\w+(\.\w+)*\$$)/.test(s);
+    },
+    isClientVariable: function(s) {
+      if (!s || typeof s !== 'string') {
+        return false;
+      }
+      return /(^@\d+-\w+(\.\w+)*@$)|(^\$\d+-\w+(\.\w+)*\$$)/.test(s);
+    },
+    isIdentifier: function(s) {
+      if (!s || typeof s !== 'string') {
+        return false;
+      }
+      return /^\$(\d+-)?\w+(\.\w+)*\$$/.test(s);
+    },
+    extractVariables: function(s) {
+      if (!s || typeof s !== 'string') {
+        return [];
+      }
+      var vars = [];
+      var set = {};
+      s.replace(this.variableAndIdentifier, function(v) {
+        var vn = v.replace(/@|\$/g, '').toUpperCase();
+        if (!set[vn]) {
+          set[vn] = true;
+          vars.push(vn);
+        }
+      });
+
+      return vars
+    },
+    extractClientVariables: function(s) {
+      if (!s || typeof s !== 'string') {
+        return [];
+      }
+      var vars = [];
+      var set = {};
+      s.replace(this.clientVariable, function(v) {
+        var vn = v.replace(/@|\$/g, '').toUpperCase();
+        if (!set[vn]) {
+          set[vn] = true;
+          vars.push(vn);
+        }
+      });
+
+      return vars
+    }
+  }
+
 
 	function getSource (newId) {
 		var source = this.getConfig();
@@ -44,7 +110,7 @@
 
 		return source;
 	}	
-	function doSave ( next) {
+	function doSave (next) {
 		var opt = this.__opt;
 		var source = getSource.call(this);
 		if (!source || submitting) {
@@ -59,7 +125,7 @@
 			submitting = false;
 			opt.onSave && opt.onSave(source);
 			if (next) {
-				return next();
+				return next(source);
 			}
 			
 			showMessage('save success', 'success');
@@ -73,8 +139,8 @@
 		cfg = oldCreateConfigurator.call(Enhancer.DatasourceManager, id, opt);
 
 		cfg.__opt = opt;
-		cfg.save = function () {
-			doSave.call(this);
+		cfg.save = function (cb) {
+			doSave.call(this, cb);
 		}
 		
 		var oldSetConfig = cfg.setConfig
@@ -102,6 +168,7 @@
 				sources.some(function (item) {
 					if (item.id == id) {
 						source = item;
+						source.params = source.params || [];
 						return true;
 					}
 				});
@@ -140,11 +207,23 @@
 		});
 	}
 
+  Enhancer.DatasourceManager.testSQL = function (sql, cb) {
+    console.warn('组件本地开发阶段不支持数据库连接,  请用静态数据源')
+    cb({
+      success: true,
+      metaData: [],
+      params: []
+    })
+  }
 	Enhancer.DatasourceManager.addDatasource = function (source, cb) {
 		var id = Date.now();
 		source.id = id;
+		source.params = source.params || [];
 		saveSource('addSource', source, cb);
 	}
+  Enhancer.DatasourceManager.editDatasource = Enhancer.DatasourceManager.editDatasource ||  function (opt) { ///
+
+  }
 	Enhancer.DatasourceManager.delDatasource = function (id, cb) {
 		saveSource('delSource', {id: id}, cb);
 	}
@@ -166,6 +245,12 @@
 			saveProfile('config');
 		}
 	}
+	var staticAssets = {};
+	try {
+		staticAssets = JSON.parse(localStorage.getItem('staticAssets') || '{}')
+	} catch (e) {
+	}
+
 	Enhancer.uploadFile = function (files, name, cb) {
 		var formData = new FormData();
 		[].slice.call(files, 0).forEach(function (file, i) {
@@ -175,6 +260,8 @@
 		var request = new XMLHttpRequest();
 		request.onload = function () {
 			var res = JSON.parse(this.responseText);
+			staticAssets[name] = res.data.files[0].url;
+			localStorage.setItem('staticAssets', JSON.stringify(staticAssets));
 			cb(res.data);
 		}
 		request.onerror = function (err) {
@@ -182,6 +269,23 @@
 		}
 		request.open("POST", "/upload");
 		request.send(formData);
+	}
+	Enhancer.uploadStaticResource = Enhancer.uploadFile;
+	Enhancer.getStaticResourceUrl = function (name) {
+		return staticAssets[name];
+	}
+	Enhancer.deleteStaticResource = function (name) {
+		delete staticAssets[name];
+		localStorage.setItem('staticAssets', JSON.stringify(staticAssets));
+	}
+	Enhancer.getEnvironment = function () {
+		return {
+			projectId: 1,
+			projectName: 'projectName',
+			pageId: 1,
+			entityNumber: 1,
+			isProduction: false
+		}
 	}
 	
 
@@ -191,13 +295,15 @@
 		var ret = type === 'list' ? [] : {};
 		var test = {
 			list: function () { return true;},
-			enhancer: function (key) { return !/^\d+-/.test(key); },
-			user: function (key) { return /^\d+-/.test(key); }
+			all: function () { return true;},
+			enhancer: function (key) { key = key.toUpperCase(); return !/^\d+-/.test(key) || /^[012]-/.test(key); },
+			user: function (key) { key = key.toUpperCase(); return /^1-/.test(key) || !!(envVars['1-' + key]); }
 		};
 		Object.keys(envVars).forEach(function (key) {
+			key = key.toUpperCase();
 			if (test[type](key)) {
-				key = type === 'list' ? ret.length : key;
-				ret[key] = {
+				var key1 = type === 'list' ? ret.length : key;
+				ret[key1] = {
 					name: key,
 					type: typeof envVars[key]
 				}
@@ -212,11 +318,16 @@
 		cb(getVariable('user'));
 	}
 	Enhancer.VariableManager.getAllCurrSupportedVariables = function (cb) {
+		cb(getVariable('all'));
+	}
+	Enhancer.VariableManager.getAllCurrSupportedVariableList = function (cb) {
 		cb(getVariable('list'));
 	}
+	
 
 	Enhancer.DatasourceManager.setDatasource = function (id, source, cb) {
 		source.id = id;
+		source.params = source.params || [];
 		saveSource('setSource', source, cb);
 	}
 
@@ -258,6 +369,10 @@
 		
 		if (typeof componentConfig.getProfile === 'function') {
 			var profile = type === 'remove' ? data : componentConfig.getProfile();
+			if (profile === false) {
+				return
+			}
+			var ext;
 			if (type === 'list') {
 				var sources = [];
 				cfgs.forEach(function (cfg) {
@@ -277,13 +392,33 @@
 					id: Date.now(),
 					data: sources
 				}
+			} else if (type === 'config') {
+				if (componentConfig.getDependentVariableList) {
+					ext = {
+						dependencies: componentConfig.getDependentVariableList(profile)
+					}
+				}
+				
+				if (componentConfig.getSupportedEventList) {
+					var eventList = componentConfig.getSupportedEventList(profile);
+					if (!Array.isArray(eventList)) {
+						showMessage('getSupportedEventList must return an array')
+					}
+				}
+				
+				if (componentConfig.getSupportedVariableList) {
+					var varList = componentConfig.getSupportedVariableList(profile);
+					if (!Array.isArray(varList)) {
+						showMessage('getSupportedVariableList must return an array')
+					}
+				}
 			}
 			
 			submitting = true;
 			ajax({
 				url: '/profile',
 				type: 'POST',
-				data: JSON.stringify({type: type, data: profile})
+				data: JSON.stringify({type: type, data: profile, ext: ext})
 			}, function (res) {
 				submitting = false;
 				showMessage('profile saved', 'success');
@@ -301,7 +436,7 @@
 	}
 
 	window.parent.document.getElementById('saveAs').onclick = function () {
-		var name = window.prompt("将当前配置保存为:") || '';
+		var name = window.prompt("将配置保存成新的测试场景:") || '';
 		if (!name.trim()) {
 			return
 		}
@@ -316,6 +451,25 @@
 			root.find('ul:first').append(html);
 		});
 	}
+
+	var previewJSON = $('.bottom .toolbar #previewJSON', window.parent.document);
+	if (!previewJSON.length) {
+		$('.bottom .toolbar', window.parent.document).append('<i id="previewJSON" title="查看 profile" class="fas fa-database ui-corner-all ui-state-default"></i>')
+		$('.bottom .toolbar #previewJSON', window.parent.document).click(function () {
+			var str = JSON.stringify(componentConfig.getProfile(), null, 2);
+			Enhancer.CodeEditor.edit('var profile = ' + str , {
+				mode: 'javascript'
+			}, function () {
+			});
+
+			var bottom = $('.code-editor-panel .editor-bottom .button');
+			bottom.eq(1).hide();
+			bottom.eq(0).click(function() {
+				bottom.eq(1).show();
+			})
+		});
+	}
+
 
 	var child;
 	window.parent.document.getElementById('preview').onclick = function () {
@@ -363,5 +517,55 @@
       timeout: 2
     });
 	}
+
+
+	function getCookie(name) {  
+    var i, cookie, cookieStr,           
+        cookies = document.cookie.split(";");       
+
+    for (i=0; i<cookies.length; i++) {      
+      cookie = cookies[i];            
+      cookieStr = cookie.split("=");
+      //如果子目录和父目录同时设置了同一个cookie, 那么子目录的cookie会在document.cookie中靠前的位置          
+      if (cookieStr && cookieStr[0].replace(/^(\s*)|(\s*)$/g, "") == name) {              
+          return  decodeURI(cookieStr[1]);        
+      }
+    }
+	}
+
+	function setCookie (name, value, expires, domain, path, secure) {                    
+    var date,  
+        str = escape(name) + "=" + escape(value);       
+        date = new Date();
+        
+    str += domain ?   "; domain=" + domain : "";
+    str += path ?  "; path=" + path : "";
+    str +=  expires ? "; expires=" + expires : "";
+    str += secure ? "; secure" : "";
+    document.cookie = str;
+	}
+
+
+  var lang = getCookie('lang');
+  lang = lang || 'zh-cn';
+  $('#header .toolbar span.logout', window.parent.document).off('click').click(function () {
+    var lang = getCookie('lang');
+    lang = lang || 'zh-cn';
+    setCookie('lang', lang === 'zh-cn' ? 'en' : 'zh-cn', (new Date('2120-12-01 00:00:00')).toGMTString(), '', '/')
+    window.location.reload(true);
+  }).html('<i class="fas fa fa-globe"></i>' + (lang === 'zh-cn' ? 'English' : '中文'))
+  
+  var themeName = (document.cookie || '').match(/theme=([^;]+)/);
+  themeName = themeName ? themeName[1] : 'base';
+  if (themeName) {
+    var $theme = $('#theme', window.parent.document)
+    $theme.attr('href', './preview/lib/css/themes/' + themeName + '/jquery-ui.theme.min.css?' + Date.now())
+    .attr('themename', themeName);
+    $("body", window.parent.document).attr("theme", themeName);
+  }
+
+  // $('#header .toolbar', window.parent.document).append('<span class="theme"><i class="fas fa-paint-brush"></i>主题</span>')
+  // $('#header .toolbar > span', window.parent.document).css('margin-left', 0).find('i').css('margin', 0);
+  //$('#header .toolbar span.theme', window.parent.document).off('click').click(function () {})
 })();
 

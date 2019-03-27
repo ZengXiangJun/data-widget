@@ -9,6 +9,7 @@ const prod = process.env.NODE_ENV === "production";
 const package = require('./package.json');
 
 
+let mobileEnv = '';
 let ret = [];
 ['configurator', 'widget'].forEach((key) => {
   const files = fs.readdirSync(path.resolve(ROOT_PATH, `src/${key}/i18n`));
@@ -112,17 +113,17 @@ let ret = [];
 
 function handleSimulator () {
   const custom = getCustomData();
-  let html = fs.readFileSync('./preview/simulator.html', 'utf8');
+  let html = fs.readFileSync(`./preview/simulator${mobileEnv}.html`, 'utf8');
   html = html.replace(/\/\/menuNodesExtraStart(.|\n)+?\/\/menuNodesExtraEnd/, `//menuNodesExtraStart
     window.menuNodesExtraEnd = ${JSON.stringify(custom)}
     //menuNodesExtraEnd`);
-  fs.writeFileSync('./preview/simulator.html', html, 'utf8');
+  fs.writeFileSync(`./preview/simulator${mobileEnv}.html`, html, 'utf8');
 
-  html = fs.readFileSync('./preview/config.html', 'utf8');
+  html = fs.readFileSync(`./preview/config${mobileEnv}.html`, 'utf8');
   html = html.replace(/\/\/menuNodesExtraStart(.|\n)+?\/\/menuNodesExtraEnd/, `//menuNodesExtraStart
     window.menuNodesExtraEnd = ${JSON.stringify(custom)}
     //menuNodesExtraEnd`);
-  fs.writeFileSync('./preview/config.html', html, 'utf8');
+  fs.writeFileSync(`./preview/config${mobileEnv}.html`, html, 'utf8');
 }
 
 function getMockData(id) {
@@ -205,7 +206,7 @@ function uploadFile (req, res) {
     files && Object.keys(files).forEach((key) => {
       files[key].forEach((file) => {
         data.push({
-          filename: file.originalFilename,
+          fieldName: file.fieldName,
           originalFilename: file.originalFilename,
           size: file.size || file.headers.size,
           url: '/' + file.path
@@ -351,6 +352,7 @@ function saveProfile (req, res, body) {
 
 
 module.exports = function (env) {
+  mobileEnv = env && env.mobile ? '-m' : '';
   const bs = new BrowserSyncPlugin({
     host: '127.0.0.1',
     port: 8001,
@@ -360,7 +362,7 @@ module.exports = function (env) {
     https: env ? env.https : false,
     server: { 
       baseDir: ['.'],
-      index: 'preview/config.html',
+      index: `preview/config${mobileEnv}.html`,
       files: ['src/**/*.js', 'src/**/*.less', 'src/**/*.html'],
       middleware: function(req, res, next) {
         const url = req.url.split('?')[0];
@@ -386,13 +388,20 @@ module.exports = function (env) {
           return uploadFile(req, res);
         } else if (url === '/src/configurator/configurator.html') {
           return getConfigurator(req, res);
-        }else if (url === '/preview/simulator.html') {
+        } else if (url === '/preview/simulator.html') {
           const cookie = req.headers.cookie || '';
           const match = cookie.match(/lang=([^;]+)/);
           const lang = match ? match[1] : 'zh-cn';
           let html = fs.readFileSync('./preview/simulator.html', 'utf8');
           const preview = `<script src="./lib/js/previewer.${lang}.js"></script>`;
           return res.end(html.replace(/<script\s*src="\.\/lib\/js\/previewer\.zh-cn\.js"\s*>\s*<\/\s*script>/, preview));
+        } else if (url === '/preview/simulator-m.html') {
+          const cookie = req.headers.cookie || '';
+          const match = cookie.match(/lang=([^;]+)/);
+          const lang = match ? match[1] : 'zh-cn';
+          let html = fs.readFileSync('./preview/simulator-m.html', 'utf8');
+          const preview = `<script src="./lib/js/previewer.${lang}-m.js"></script>`;
+          return res.end(html.replace(/<script\s*src="\.\/lib\/js\/previewer\.zh-cn-m\.js"\s*>\s*<\/\s*script>/, preview));
         } else if (url === '/all') {
           res.writeHead(200, {
             'Content-Type': 'application/json' 

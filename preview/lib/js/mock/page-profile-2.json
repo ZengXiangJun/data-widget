@@ -36,9 +36,10 @@
             "selectHighlight": true,
             "hoverHighlight": true,
             "sortable": true,
-            "pagination": false,
+            "pagination": true,
             "pagerPos": "right",
-            "perPageNum": 6,
+            "perPageNum": 1,
+            "centerButton": false,
             "tpl": {
               "width": 444,
               "height": 216,
@@ -145,7 +146,8 @@
           "closeBtn": false,
           "refreshBtn": false,
           "maximizeBtn": false,
-          "open": true
+          "open": true,
+          "dependencies": []
         }
       },
       "containers": [],

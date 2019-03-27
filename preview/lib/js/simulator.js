@@ -425,12 +425,13 @@ Enhancer.getFileUploadUrl = function () {
 Enhancer.ZPageManager.getPageProf = function(pid, callback) {
   var that = this;
   $.ajax({
-    url: '/all?id=' + pid
-  }).done(function (res) {
-    var profStr = JSON.stringify( res.data );
-    var profile = that.__handlePageProfileString(pid, profStr);
-    callback(profile);
-  })  
+    url: '/all?id=' + pid,
+    success: function (res) {
+      var profStr = JSON.stringify( res.data );
+      var profile = that.__handlePageProfileString(pid, profStr);
+      callback(profile);
+    }
+  });  
 };
 
 var oldGetWidgetBaseUrl = Enhancer.getWidgetBaseUrl.bind(Enhancer);
@@ -569,13 +570,16 @@ $(function() {
 
   var lastThemeName = 'base';
   var themeName = $.cookie('theme');
+  var $theme = $('#theme')
   if (themeName) {
-    var $theme = $('#theme')
     var href = $theme.attr('href').replace(lastThemeName, themeName);
     $theme.attr('href', href)
     .attr('themename', themeName);
-    $("body").attr("theme", themeName);
+  } else {
+    themeName = 'base';
+    $theme.attr('href', './lib/css/themes/' + themeName + '/jquery-ui.theme.min.css');
   }
+  $("body").attr("theme", themeName);
   setTimeout(function () {
     var match = window.location.href.match(/[&?]id=([^&]+)/);
     var id = match ? match[1] : 2;

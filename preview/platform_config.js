@@ -479,7 +479,11 @@
 		} else {
 			var match = window.location.href.match(/[&?]id=([^&]+)/);
 			var wid = match ? ('?id=' + match[1]) : '';
-			child = window.open('/preview/simulator.html' + wid);
+			var preview = '/preview/simulator.html';
+			if ( window.top.enhancerEnv) {
+				preview = '/preview/simulator-m.html';
+			}
+			child = window.open(preview + wid);
 		}
 	}
 
@@ -555,17 +559,19 @@
     window.location.reload(true);
   }).html('<i class="fas fa fa-globe"></i>' + (lang === 'zh-cn' ? 'English' : '中文'))
   
-  var themeName = (document.cookie || '').match(/theme=([^;]+)/);
-  themeName = themeName ? themeName[1] : 'base';
-  if (themeName) {
-    var $theme = $('#theme', window.parent.document)
-    $theme.attr('href', './preview/lib/css/themes/' + themeName + '/jquery-ui.theme.min.css?' + Date.now())
-    .attr('themename', themeName);
-    $("body", window.parent.document).attr("theme", themeName);
-  }
+  // var themeName = (document.cookie || '').match(/theme=([^;]+)/);
+  // themeName = themeName ? themeName[1] : 'base';
+  // if (themeName) {
+  //   var $theme = $('#theme', window.parent.document)
+  //   $theme.attr('href', './preview/lib/css/themes/' + themeName + '/jquery-ui.theme.min.css?' + Date.now())
+  //   .attr('themename', themeName);
+  //   $("body", window.parent.document).attr("theme", themeName);
+  // }
 
-  // $('#header .toolbar', window.parent.document).append('<span class="theme"><i class="fas fa-paint-brush"></i>主题</span>')
-  // $('#header .toolbar > span', window.parent.document).css('margin-left', 0).find('i').css('margin', 0);
-  //$('#header .toolbar span.theme', window.parent.document).off('click').click(function () {})
+  $('#header .toolbar', window.parent.document).append('<span class="theme"><i class="fas fa-paint-brush"></i>主题</span>')
+  $('#header .toolbar > span', window.parent.document).css('margin-left', 0).find('i').css('margin', 0);
+  $('#header .toolbar span.theme', window.parent.document).off('click').click(function () {
+  	$('#themeSwitcher', window.parent.document).show();
+  })
 })();
 

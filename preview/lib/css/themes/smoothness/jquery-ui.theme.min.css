@@ -1,29 +1,29 @@
 [theme=smoothness] {
 
-  --ui-widget-ui-widget-content-border-corlor: 211, 211, 211;
-  --ui-widget-content-border-corlor: 170, 170, 170;
-  --ui-widget-content-background-corlor: 255, 255, 255;
-  --ui-widget-content-corlor: 34, 34, 34;
-  --ui-widget-header-border-corlor: 170, 170, 170;
-  --ui-widget-header-background-corlor: 204, 204, 204;
-  --ui-widget-header-corlor: 34, 34, 34;
-  --ui-state-default-border-corlor: 211, 211, 211;
-  --ui-state-default-background-corlor: 230, 230, 230;
-  --ui-state-default-corlor: 85, 85, 85;
-  --ui-state-hover-border-corlor: 153, 153, 153;
-  --ui-state-hover-background-corlor: 218, 218, 218;
-  --ui-state-hover-corlor: 33, 33, 33;
-  --ui-state-active-border-corlor: 170, 170, 170;
-  --ui-state-active-background-corlor: 255, 255, 255;
-  --ui-state-active-corlor: 33, 33, 33;
-  --ui-state-highlight-border-corlor: 252, 239, 161;
-  --ui-state-highlight-background-corlor: 251, 249, 238;
-  --ui-state-highlight-corlor: 54, 54, 54;
-  --ui-state-error-border-corlor: 205, 10, 10;
-  --ui-state-error-background-corlor: 254, 241, 236;
-  --ui-state-error-corlor: 205, 10, 10;
-  --ui-widget-overlay-background-corlor: 170, 170, 170;
-  --ui-widget-shadow-corlor: 170, 170, 170;
+  --ui-widget-ui-widget-content-border-color: 211, 211, 211;
+  --ui-widget-content-border-color: 170, 170, 170;
+  --ui-widget-content-background-color: 255, 255, 255;
+  --ui-widget-content-color: 34, 34, 34;
+  --ui-widget-header-border-color: 170, 170, 170;
+  --ui-widget-header-background-color: 204, 204, 204;
+  --ui-widget-header-color: 34, 34, 34;
+  --ui-state-default-border-color: 211, 211, 211;
+  --ui-state-default-background-color: 230, 230, 230;
+  --ui-state-default-color: 85, 85, 85;
+  --ui-state-hover-border-color: 153, 153, 153;
+  --ui-state-hover-background-color: 218, 218, 218;
+  --ui-state-hover-color: 33, 33, 33;
+  --ui-state-active-border-color: 170, 170, 170;
+  --ui-state-active-background-color: 255, 255, 255;
+  --ui-state-active-color: 33, 33, 33;
+  --ui-state-highlight-border-color: 252, 239, 161;
+  --ui-state-highlight-background-color: 251, 249, 238;
+  --ui-state-highlight-color: 54, 54, 54;
+  --ui-state-error-border-color: 205, 10, 10;
+  --ui-state-error-background-color: 254, 241, 236;
+  --ui-state-error-color: 205, 10, 10;
+  --ui-widget-overlay-background-color: 170, 170, 170;
+  --ui-widget-shadow-color: 170, 170, 170;
 }
 
  

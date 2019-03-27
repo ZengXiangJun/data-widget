@@ -35,7 +35,7 @@ dir.forEach((theme) => {
 	if (index === -1) { console.log('error'); }
 	file = file.substring(index + 1);
 	let match = file.match(/border:1px solid #([^};\s]+)/);
-	color += `\n  --ui-widget-ui-widget-content-border-corlor: ${hex2rgb(match[1])};`;
+	color += `\n  --ui-widget-ui-widget-content-border-color: ${hex2rgb(match[1])};`;
 	file = file.substring(match.index);
 
 
@@ -45,24 +45,24 @@ dir.forEach((theme) => {
 		if (index === -1) { console.log('error', key); }
 		file = file.substring(index + 1);
 		match = file.match(/border:1px solid #([^};\s]+)/);
-		color += `\n  --ui-${key}-border-corlor: ${hex2rgb(match[1])};`
+		color += `\n  --ui-${key}-border-color: ${hex2rgb(match[1])};`
 		match = file.match(/background:#([^};\s]+)/);
-		color += `\n  --ui-${key}-background-corlor: ${hex2rgb(match[1])};`
+		color += `\n  --ui-${key}-background-color: ${hex2rgb(match[1])};`
 		match = file.match(/color:#([^};\s]+)/);
-		color += `\n  --ui-${key}-corlor: ${hex2rgb(match[1])};`;
+		color += `\n  --ui-${key}-color: ${hex2rgb(match[1])};`;
 	});
 
 	index = file.indexOf(`.ui-widget-overlay`);
 	if (index === -1) { console.log('error', 'overlay'); }
 	file = file.substring(index + 1);
 	match = file.match(/background:#([^};\s]+)/);
-	color += `\n  --ui-widget-overlay-background-corlor: ${hex2rgb(match[1])};`;
+	color += `\n  --ui-widget-overlay-background-color: ${hex2rgb(match[1])};`;
 
 	index = file.indexOf(`.ui-widget-shadow`);
 	if (index === -1) { console.log('error', 'shadow'); }
 	file = file.substring(index + 1);
 	match = file.match(/box-shadow:.+#([^};\s]+)/);
-	color += `\n  --ui-widget-shadow-corlor: ${hex2rgb(match[1])};`;
+	color += `\n  --ui-widget-shadow-color: ${hex2rgb(match[1])};`;
 
 	file = fs.readFileSync(fPath, 'utf8');
 	file = `[theme=${theme}] \{\n${color}\n\}\n\n ${file.substring(file.indexOf('/*!') - 2)}`;

@@ -21,7 +21,8 @@ Enhancer.registerWidget({
         var $container = this.getContainer();
         this.profile = profile;
         this.$container = $container;
-        that.affected(1);
+        this.currPage = 1;
+        that.affected();
         //选中高亮
         $container.on('click', '.singleWrap', function() {
             $container.find('.singleWrap').attr('isCurr', 'false');
@@ -75,7 +76,8 @@ Enhancer.registerWidget({
         $container.on('click', '#prePage', function() {
             var currPage = parseInt($(this).attr('page'));
             if (currPage > 1) {
-                that.affected(currPage - 1);
+                that.currPage = currPage - 1;
+                that.affected();
             }
         })
         //后一页跳转
@@ -83,7 +85,8 @@ Enhancer.registerWidget({
             var currPage = parseInt($(this).attr('page'));
             var maxPage = parseInt($(this).attr('maxPage'));
             if (currPage < maxPage) {
-                that.affected(currPage + 1);
+                that.currPage = currPage + 1;
+                that.affected();
             }
         })
         //指定页跳转
@@ -97,13 +100,15 @@ Enhancer.registerWidget({
                 goToPage = maxPage
             }
             if (currPage !== goToPage) {
-                that.affected(goToPage);
+                that.currPage = goToPage;
+                that.affected();
             }
         })
         //显示按钮跳转
         $container.on('click', '.pageJump', function() {
             if (!$(this).hasClass('ui-state-highlight')) {
-                that.affected(parseInt($(this).attr('page')));
+                that.currPage = parseInt($(this).attr('page'));
+                that.affected();
             }
         })
         return $container;
@@ -159,17 +164,18 @@ Enhancer.registerWidget({
             return true
         }
     },
-    affected: function(page) {
+    affected: function() {
         var that = this;
+        var page = this.currPage;
         var $container = this.$container;
         $container.html(tpl({})).addClass('data-widget');
         var profile = this.profile;
         var rule = {};
         if (profile.pagination) {
             rule = {
-                paged: true,
-                page: page,
-                rowNum: profile.perPageNum
+                "paged": true,
+                "page": page,
+                "rowNum": profile.perPageNum
             }
         }
         this.getSourceData(profile.sourceId, rule, function(data){

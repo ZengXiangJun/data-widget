@@ -217,7 +217,11 @@ Enhancer.registerWidget({
                     });  
                 }
             }
-            that.trig('complete');
+            that.trig('onDataComplete');
+            if (!that.__isWidgetInitialized) { 
+                that.__isWidgetInitialized = true;
+                that.trig('complete');
+            }
         })
     },
     __content: function(data) {

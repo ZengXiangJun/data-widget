@@ -52,6 +52,7 @@ module.exports = {
     onUnitClick: 'On Unit Click',
     onUnitSelected: 'On Unit Selected',
     onSelectedUnitsChange: 'On Selected Units Change',
+    onDataComplete: 'On Data Complete',
     onUnitIndexChange: 'On Unit Index Change',
     Units: 'Units',
     CURR_UNIT_INDEX: 'CURR UNIT INDEX',

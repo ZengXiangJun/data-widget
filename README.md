@@ -72,6 +72,10 @@
 - 【事件 ID】随机生成
 - 【触发时机】点击按钮时。
 
+#### 数据加载完毕 （On Data Complete）
+- 【事件 ID】onDataComplete
+- 【触发时机】数据加载完毕时。
+
 ### 可用变量说明
 #### Units
 - 【类型】array

@@ -52,6 +52,7 @@ module.exports = {
     onUnitClick: '单击部件时',
     onUnitSelected: '选中部件时',
     onSelectedUnitsChange: '选中部件变化时',
+    onDataComplete: '数据加载完毕时',
     onUnitIndexChange: '部件顺序变化时',
     Units: '所有部件数据',
     CURR_UNIT_INDEX: '当前部件序号',

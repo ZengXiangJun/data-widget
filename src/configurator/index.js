@@ -447,6 +447,10 @@ var configurator = {
             'id': 'onSelectedUnitsChange',
             'name': locale('onSelectedUnitsChange'),
             'des': "Triggered when selected Units change"
+        }, {
+            'id': 'onDataComplete',
+            'name': locale('onDataComplete'),
+            'des': "Triggered when data complete"
         }];
         if (profile.sortable) {
             data = data.concat([{

@@ -324,6 +324,7 @@ var configurator = {
         profile = $.extend({
             setSpacing: 10,
             selectHighlight: true,
+            singleSelect: false,
             hoverHighlight: true,
             sortable: true,
             pagination: false,
@@ -350,6 +351,7 @@ var configurator = {
         //赋值
         $('#setSpacing').val(profile.setSpacing);
         $('#selectHighlight').prop('checked', profile.selectHighlight);
+        $('#singleSelect').prop('checked', profile.singleSelect);
         $('#hoverHighlight').prop('checked', profile.hoverHighlight);
         $('#sortable').prop('checked', profile.sortable);
         $('#pagination').prop('checked', profile.pagination);
@@ -413,6 +415,7 @@ var configurator = {
                 sourceId: $('#sourceWindow').attr('sourceId'),
                 setSpacing: parseInt($('#setSpacing').val()),
                 selectHighlight: $('#selectHighlight').prop('checked'),
+                singleSelect: $('#singleSelect').prop('checked'),
                 hoverHighlight: $('#hoverHighlight').prop('checked'),
                 sortable: $('#sortable').prop('checked'),
                 pagination: $('#pagination').prop('checked'),

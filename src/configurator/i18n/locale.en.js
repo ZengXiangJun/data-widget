@@ -13,6 +13,7 @@ module.exports = {
     componentConfig: 'Component Config',
     setSpacing: 'Set Spacing',
     selectHighlight: 'Select Highlight',
+    singleSelect: 'Single Select',
     hoverHighlight: 'Hover Highlight',
     sortable: 'Sortable',
     pagination: 'Pagination',

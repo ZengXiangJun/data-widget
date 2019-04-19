@@ -7,6 +7,7 @@ Enhancer.registerWidget({
         profile = $.extend({
             setSpacing: 10,
             selectHighlight: true,
+            singleSelect: false,
             hoverHighlight: true,
             sortable: true,
             pagination: false,
@@ -24,11 +25,15 @@ Enhancer.registerWidget({
         this.currPage = 1;
         that.affected();
         //选中高亮
+
         $container.on('click', '.singleWrap', function() {
             $container.find('.singleWrap').attr('isCurr', 'false');
             $(this).attr('isCurr', 'true');
             that.trig('onUnitClick');
             if (profile.selectHighlight) {
+                if (profile.singleSelect) {
+                    $(this).siblings().removeClass('ui-state-highlight').removeAttr('seletTime');
+                }
                 if($(this).hasClass('ui-state-highlight')) {
                     $(this).removeClass('ui-state-highlight').removeAttr('seletTime');
                 } else {

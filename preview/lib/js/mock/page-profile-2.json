@@ -34,6 +34,7 @@
             "sourceId": "1524905928763",
             "setSpacing": 10,
             "selectHighlight": true,
+            "singleSelect": false,
             "hoverHighlight": true,
             "sortable": true,
             "pagination": true,

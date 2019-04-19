@@ -13,6 +13,7 @@ module.exports = {
     componentConfig: '组件配置',
     setSpacing: '设置间距',
     selectHighlight: '选中高亮',
+    singleSelect: '单项选中',
     hoverHighlight: '悬浮高亮',
     sortable: '支持排序',
     pagination: '设置分页',

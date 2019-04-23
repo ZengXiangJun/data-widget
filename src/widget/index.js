@@ -199,7 +199,7 @@ Enhancer.registerWidget({
             $container.find('.singleWrap').map(function(index) {
                 $(this).data('eachData', data[index]);
             })
-            $container.find('.buttonWrap').button();
+            $container.find('.buttonWrap').addClass('ui-button').addClass("ui-corner-all").addClass('ui-widget').attr('role', 'button');
             if (profile.centerButton) {
                 $container.find('.bottomWrap').css('text-align', 'center');
             }
@@ -209,7 +209,7 @@ Enhancer.registerWidget({
                     'page': page,
                     'maxPage': maxPage || 1
                 })).css('display', 'block');
-                $container.find('.pageWrap a').button();
+                $container.find('.pageWrap a').addClass('ui-button').addClass("ui-corner-all").addClass('ui-widget').attr('role', 'button');
                 if (profile.pagerPos === 'left') {
                     $container.find('.pageWrap').css({
                         'float': 'left',

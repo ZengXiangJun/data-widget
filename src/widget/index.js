@@ -125,7 +125,11 @@ Enhancer.registerWidget({
         function allData() {
             var data = []
             $container.find('.singleWrap').map(function() {
-                data.push($(this).data('eachData'));
+                var eachData = $(this).data('eachData');
+                if (typeof eachData === 'string') {
+                    eachData = JSON.parse(eachData);
+                }
+                data.push(eachData);
             })
             return data;
         }
@@ -151,10 +155,14 @@ Enhancer.registerWidget({
             })
             return lastIndex;
         }
+        var CURR_UNIT_DATA = $container.find('.singleWrap[isCurr="true"]').data('eachData');
+        if (typeof CURR_UNIT_DATA === 'string') {
+            CURR_UNIT_DATA = JSON.parse(CURR_UNIT_DATA);
+        }
         return {
             'Units': allData(),
             'CURR_UNIT_INDEX': parseInt($container.find('.singleWrap[isCurr="true"]').attr('index')),
-            'CURR_UNIT_DATA': $container.find('.singleWrap[isCurr="true"]').data('eachData'),
+            'CURR_UNIT_DATA': CURR_UNIT_DATA,
             'SELECTED_UNITS_INDEX': selectIndex(),
             'LAST_SELECTED_UNIT_INDEX': lastSelectIndex(),
             'BUTTON_EVENT_ID': $container.find('.buttonWrap[isCurrButton="true"]').attr('unitid'),
@@ -197,7 +205,7 @@ Enhancer.registerWidget({
                 'padding-right': profile.setSpacing + 'px'
             });
             $container.find('.singleWrap').map(function(index) {
-                $(this).data('eachData', data[index]);
+                $(this).data('eachData', JSON.stringify(data[index]));
             })
             $container.find('.buttonWrap').addClass('ui-button').addClass("ui-corner-all").addClass('ui-widget').attr('role', 'button');
             if (profile.centerButton) {

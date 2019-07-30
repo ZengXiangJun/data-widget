@@ -24,8 +24,8 @@ Enhancer.registerWidget({
         this.$container = $container;
         this.currPage = 1;
         that.affected();
-        //选中高亮
 
+        //选中高亮
         $container.on('click', '.singleWrap', function() {
             $container.find('.singleWrap').attr('isCurr', 'false');
             $(this).attr('isCurr', 'true');
@@ -55,7 +55,9 @@ Enhancer.registerWidget({
         //排序
         if (profile.sortable) {
             $container.find('.content').sortable({
-                stop: function() {
+                start: function(event, ui) {
+                },
+                stop: function(event, ui) {
                     var hasSelect = false;
                     $container.find('.singleWrap').map(function(index) {
                         $(this).attr('index', index);
@@ -159,6 +161,15 @@ Enhancer.registerWidget({
         if (typeof CURR_UNIT_DATA === 'string') {
             CURR_UNIT_DATA = JSON.parse(CURR_UNIT_DATA);
         }
+        console.log({
+            'Units': allData(),
+            'CURR_UNIT_INDEX': parseInt($container.find('.singleWrap[isCurr="true"]').attr('index')),
+            'CURR_UNIT_DATA': CURR_UNIT_DATA,
+            'SELECTED_UNITS_INDEX': selectIndex(),
+            'LAST_SELECTED_UNIT_INDEX': lastSelectIndex(),
+            'BUTTON_EVENT_ID': $container.find('.buttonWrap[isCurrButton="true"]').attr('unitid'),
+            'BUTTON_EVENT_NAME': $container.find('.buttonWrap[isCurrButton="true"]').attr('text')
+        })
         return {
             'Units': allData(),
             'CURR_UNIT_INDEX': parseInt($container.find('.singleWrap[isCurr="true"]').attr('index')),

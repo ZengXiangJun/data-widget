@@ -24,6 +24,7 @@ module.exports = {
     perPageNum: '每页数量',
     advancedConfig: '高级配置',
     hierarchicalDisplay: '分层显示',
+    ascendHierarchical: '升序分层',
     operateTitle: '操作',
     addPic: '图片',
     addTitle: '标题',

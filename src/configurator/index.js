@@ -23,6 +23,18 @@ var configurator = {
         $('#perPageNum').blur(function() {
             $(this).val(parseInt($(this).val()) < 1 ? 1 : parseInt($(this).val()));
         });
+        $('#hierarchicalDisplay').click(function() {
+            var checked = $(this).prop('checked');
+            if (checked) {
+                $('#sortable').prop('checked', false);
+            }
+        })
+        $('#sortable').click(function() {
+            var checked = $(this).prop('checked');
+            if (checked) {
+                $('#hierarchicalDisplay').prop('checked', false);
+            }
+        })
         //禁用输入
         $('#pagination').click(function() {
             if($(this).prop('checked')) {
@@ -331,6 +343,8 @@ var configurator = {
             pagerPos: 'right',
             perPageNum: 6,
             centerButton: false,
+            hierarchicalDisplay: false,
+            ascendHierarchical: false,
             tpl: {
                 width: 300,
                 height: 200,
@@ -358,6 +372,8 @@ var configurator = {
         $('#pagerPos').val(profile.pagerPos);
         $('#perPageNum').val(profile.perPageNum);
         $('#centerButton').prop('checked', profile.centerButton);
+        $('#hierarchicalDisplay').prop('checked', profile.hierarchicalDisplay);
+        $('#ascendHierarchical').prop('checked', profile.ascendHierarchical);
         if (!profile.pagination) {
             $('#pagerPos,#perPageNum').attr('disabled', true);
         };
@@ -422,6 +438,8 @@ var configurator = {
                 pagerPos: $('#pagerPos').val(),
                 perPageNum: parseInt($('#perPageNum').val()),
                 centerButton: $('#centerButton').prop('checked'),
+                hierarchicalDisplay: $('#hierarchicalDisplay').prop('checked'),
+                ascendHierarchical: $('#ascendHierarchical').prop('checked'),
                 tpl: {
                     width: $('.template').width(),
                     height: $('.template').height(),

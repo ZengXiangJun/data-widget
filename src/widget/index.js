@@ -12,7 +12,9 @@ Enhancer.registerWidget({
             sortable: true,
             pagination: false,
             pagerPos: 'right',
-            perPageNum: 6,
+            perPageNum: 6,            
+            hierarchicalDisplay: false,
+            ascendHierarchical: false,
             tpl: {
                 width: 300,
                 height: 200
@@ -25,6 +27,9 @@ Enhancer.registerWidget({
         this.currPage = 1;
         that.affected();
 
+        if (profile.hierarchicalDisplay) {
+            $container.find('.content').addClass('noWrap');
+        }
         //选中高亮
         $container.on('click', '.singleWrap', function() {
             $container.find('.singleWrap').attr('isCurr', 'false');
@@ -161,7 +166,7 @@ Enhancer.registerWidget({
         if (typeof CURR_UNIT_DATA === 'string') {
             CURR_UNIT_DATA = JSON.parse(CURR_UNIT_DATA);
         }
-        console.log({
+        console.log('getData', {
             'Units': allData(),
             'CURR_UNIT_INDEX': parseInt($container.find('.singleWrap[isCurr="true"]').attr('index')),
             'CURR_UNIT_DATA': CURR_UNIT_DATA,
@@ -210,6 +215,11 @@ Enhancer.registerWidget({
             }
             if (data.rows){
                 data = data.rows;
+            }
+            console.log('data', data);
+            if (profile.hierarchicalDisplay) {
+                var sortData = [];
+                
             }
             $container.find('.content').html(that.__content(data)).css({
                 'padding-bottom': profile.setSpacing + 'px',

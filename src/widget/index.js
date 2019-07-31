@@ -209,19 +209,19 @@ Enhancer.registerWidget({
             }
             if (profile.hierarchicalDisplay) {
                 data.forEach(function(item, index) {
-                    if (!item.unit_floor) {
-                        item.unit_floor = 0;
-                    } else if (typeof item.unit_floor !== 'number') {
-                        alert('unit_floor 应当为数字！');
+                    if (!item.floor) {
+                        item.floor = 0;
+                    } else if (typeof item.floor !== 'number') {
+                        alert('floor 应当为数字！');
                     }
                 })
                 if (profile.ascendHierarchical) {
                     data.sort(function(a, b) {
-                        return a.unit_floor - b.unit_floor;
+                        return a.floor - b.floor;
                     })
                 } else {
                     data.sort(function(a, b) {
-                        return b.unit_floor - a.unit_floor;
+                        return b.floor - a.floor;
                     })
                 }
             }
@@ -268,9 +268,9 @@ Enhancer.registerWidget({
         var str = '';
         data.forEach(function(eachData, index) {
             if (index && profile.hierarchicalDisplay) {
-                var pre_unit_unit_floor = data[index - 1].unit_floor;
-                var curr_unit_unit_floor = eachData.unit_floor;
-                if (pre_unit_unit_floor !== curr_unit_unit_floor) {
+                var pre_floor = data[index - 1].floor;
+                var curr_floor = eachData.floor;
+                if (pre_floor !== curr_floor) {
                     str += '<br>';
                 }
             }

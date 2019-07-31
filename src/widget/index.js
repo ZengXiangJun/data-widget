@@ -14,7 +14,7 @@ Enhancer.registerWidget({
             pagerPos: 'right',
             perPageNum: 6,            
             hierarchicalDisplay: false,
-            ascendHierarchical: false,
+            ascendHierarchical: true,
             tpl: {
                 width: 300,
                 height: 200
@@ -166,15 +166,6 @@ Enhancer.registerWidget({
         if (typeof CURR_UNIT_DATA === 'string') {
             CURR_UNIT_DATA = JSON.parse(CURR_UNIT_DATA);
         }
-        console.log('getData', {
-            'Units': allData(),
-            'CURR_UNIT_INDEX': parseInt($container.find('.singleWrap[isCurr="true"]').attr('index')),
-            'CURR_UNIT_DATA': CURR_UNIT_DATA,
-            'SELECTED_UNITS_INDEX': selectIndex(),
-            'LAST_SELECTED_UNIT_INDEX': lastSelectIndex(),
-            'BUTTON_EVENT_ID': $container.find('.buttonWrap[isCurrButton="true"]').attr('unitid'),
-            'BUTTON_EVENT_NAME': $container.find('.buttonWrap[isCurrButton="true"]').attr('text')
-        })
         return {
             'Units': allData(),
             'CURR_UNIT_INDEX': parseInt($container.find('.singleWrap[isCurr="true"]').attr('index')),
@@ -216,10 +207,23 @@ Enhancer.registerWidget({
             if (data.rows){
                 data = data.rows;
             }
-            console.log('data', data);
             if (profile.hierarchicalDisplay) {
-                var sortData = [];
-                
+                data.forEach(function(item, index) {
+                    if (!item.unit_floor) {
+                        item.unit_floor = 0;
+                    } else if (typeof item.unit_floor !== 'number') {
+                        alert('unit_floor 应当为数字！');
+                    }
+                })
+                if (profile.ascendHierarchical) {
+                    data.sort(function(a, b) {
+                        return a.unit_floor - b.unit_floor;
+                    })
+                } else {
+                    data.sort(function(a, b) {
+                        return b.unit_floor - a.unit_floor;
+                    })
+                }
             }
             $container.find('.content').html(that.__content(data)).css({
                 'padding-bottom': profile.setSpacing + 'px',
@@ -263,6 +267,13 @@ Enhancer.registerWidget({
         var profile = this.profile;
         var str = '';
         data.forEach(function(eachData, index) {
+            if (index && profile.hierarchicalDisplay) {
+                var pre_unit_unit_floor = data[index - 1].unit_floor;
+                var curr_unit_unit_floor = eachData.unit_floor;
+                if (pre_unit_unit_floor !== curr_unit_unit_floor) {
+                    str += '<br>';
+                }
+            }
             str += `<div class="singleWrap ui-widget-content" index="${index}" 
             style="margin-left:${profile.setSpacing}px;margin-top:${profile.setSpacing}px;
             width:${profile.tpl.width}px"><div class="topWrap" 

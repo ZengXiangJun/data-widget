@@ -344,7 +344,7 @@ var configurator = {
             perPageNum: 6,
             centerButton: false,
             hierarchicalDisplay: false,
-            ascendHierarchical: false,
+            ascendHierarchical: true,
             tpl: {
                 width: 300,
                 height: 200,

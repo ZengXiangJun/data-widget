@@ -22,6 +22,8 @@ module.exports = {
     center: 'Center',
     right: 'Right',
     perPageNum: 'Per Page Number',
+    advancedConfig: 'Advanced Config',
+    hierarchicalDisplay: 'Hierarchical Display',
     operateTitle: 'Operate',
     addPic: 'Picture',
     addTitle: 'Title',

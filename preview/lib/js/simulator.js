@@ -409,7 +409,7 @@ Enhancer.simulatorHack.getWidgetName = function () {
   return componentName || 'data-widget/0.0.0';
 }
 //Enhancer.WIDGET_BASE_URL = 'http://widget-assets.enhancer.cc/widget-store/';
-Enhancer.WIDGET_BASE_URL = 'http://widget-assets.enhancer.io/';
+Enhancer.WIDGET_BASE_URL = 'http://widget-assets.wuyuan.io/';
 Enhancer.ZUserData.set((function(vars) {
   for (var i in vars) {
     if (/^\w+(\.\w+)*$/.test(i)) {
@@ -655,4 +655,16 @@ $(function() {
     }
   }
   Enhancer.CssVar.bind($('#theme'));
+
+
+  var ua = navigator.userAgent;
+  var isDesktop = true;
+  if (ua.match(/(Android)\s+([\d.]+)/) || ua.match(/(iPhone\sOS)\s([\d_]+)/)) {
+    isDesktop = false;
+  }
+  Enhancer.UA = Enhancer.UA || {
+    isDesktop: isDesktop,
+    isMobile: !isDesktop,
+    isSmallScreen: window.innerWidth < 720
+  }
 });

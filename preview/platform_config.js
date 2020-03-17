@@ -87,6 +87,7 @@
 			this.__oldId = this.__sid;
 		}
 		this.__sid = newId ? Date.now() : this.__sid || Date.now();
+		this.sourceId = this.__sid;
 		source.id = this.__sid; 
 		source.params = source.params || [];
 
@@ -140,7 +141,7 @@
 
 		cfg.__opt = opt;
 		cfg.save = function (cb) {
-			doSave.call(this, cb);
+			doSave.call(this/*, cb*/);
 		}
 		
 		var oldSetConfig = cfg.setConfig
@@ -149,7 +150,7 @@
 			oldSetConfig.call(this, source);
 		}
 
-		$('.config-item.local-process input').prop('disabled', true);
+		//$('.config-item.local-process input').prop('disabled', true);
 		cfgs.push(cfg);
 		return cfg;
 	}
@@ -181,10 +182,11 @@
 		});
 	}
 
-
+	window.enhancerComponentName = "data-widget";
 	function ajax(opt, success, fail) {
 		var match = window.location.href.match(/[&?]id=([^&]+)/);
-		var wid = match ? ('?id=' + match[1]) : '';
+		opt.url = opt.url + '?wname=' + window.enhancerComponentName;
+		var wid = match ? ('&id=' + match[1]) : '';
 		opt.url = opt.url + wid;
 		$.ajax(opt).done(function (res) {
 			if (res.success) {
@@ -568,10 +570,15 @@
   //   $("body", window.parent.document).attr("theme", themeName);
   // }
 
+  if ( window.parent.initConfigurator) {
+		return;
+	}
   $('#header .toolbar', window.parent.document).append('<span class="theme"><i class="fas fa-paint-brush"></i>主题</span>')
   $('#header .toolbar > span', window.parent.document).css('margin-left', 0).find('i').css('margin', 0);
   $('#header .toolbar span.theme', window.parent.document).off('click').click(function () {
   	$('#themeSwitcher', window.parent.document).show();
-  })
+  });
+
+  window.parent.initConfigurator = true;
 })();
 

@@ -24,6 +24,8 @@
   --ui-state-error-color: 205, 10, 10;
   --ui-widget-overlay-background-color: 170, 170, 170;
   --ui-widget-shadow-color: 102, 102, 102;
+ --ui-state-primary: 205, 10, 10;
+ --ui-state-secondary: 173, 173, 173;
 }
 
  

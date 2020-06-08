@@ -184,9 +184,13 @@ Enhancer.registerWidget({
             return true
         }
     },
-    affected: function() {
+    affected: function(p1) {
         var that = this;
-        var page = this.currPage;
+        if (p1) {
+            var page = 1;
+        } else {
+            var page = this.currPage;
+        }
         var $container = this.$container;
         $container.html(tpl({})).addClass('data-widget');
         var profile = this.profile;
